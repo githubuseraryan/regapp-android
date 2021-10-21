@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">My Login</string>
+    <string name="name">Name</string>
+    <string name="enter_name">Enter Your Name</string>
+    <string name="email">Email</string>
+    <string name="enter_email">Enter Your Email</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="re_password">Confirm Password</string>
+    <string name="enter_password_again">Confirm Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_account">Already have an account ?</string>
+    <string name="login">Login</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_text">Forgot Password?</string>
+    <string name="sign_in_google">Sign in with google</string>
+    <string name="no_account">"Don't have an account ?</string>
+    <string name="country">Country</string>
+
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="dd_mm_yy">DD-MM-YY</string>
+    <string name="aadhar_number">Aadhar Number</string>
+    <string name="enter_aadhar_no">Enter Aadhar No</string>
+    <string name="postal_address">Postal Address</string>
+    <string name="enter_address">Enter Address</string>
+</resources>
