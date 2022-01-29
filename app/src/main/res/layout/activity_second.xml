@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,7 +47,8 @@
                 android:hint="@string/enter_email"
                 android:inputType="textEmailAddress"
                 android:layout_margin="20dp"
-                android:backgroundTint="@color/colorPrimaryDark"/>
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:autofillHints="" />
 
         </LinearLayout>
 
@@ -73,8 +73,8 @@
                 android:inputType="textPassword"
                 android:layout_margin="20dp"
                 android:maxLength= "10"
-                android:autofillHints="" />
-                android:backgroundTint="@color/colorPrimaryDark"/>
+                android:autofillHints=""
+                android:backgroundTint="@color/colorPrimaryDark" />
         </LinearLayout>
 
         <Button
