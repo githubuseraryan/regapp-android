@@ -1,14 +1,15 @@
 package appcom.example.regsplashscreen;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.os.Handler;
+import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN_TIME_OUT=2000;
+    private static final int SPLASH_SCREEN_TIME_OUT = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i=new Intent(MainActivity.this,
+                Intent i = new Intent(MainActivity.this,
                         SecondActivity.class);
                 //Intent is used to switch from one activity to another.
 

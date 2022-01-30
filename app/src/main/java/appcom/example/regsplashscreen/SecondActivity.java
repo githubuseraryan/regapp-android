@@ -11,11 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import appcom.example.regsplashscreen.model.request.LoginApiRequestModel;
 import appcom.example.regsplashscreen.model.response.LoginApiResponseModel;
 import appcom.example.regsplashscreen.service.LoginApiService;
@@ -37,7 +32,7 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         signIn = findViewById(R.id.sign_in);
-        resultsTextView = (TextView) findViewById(R.id.results);
+        resultsTextView = findViewById(R.id.results);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,16 +72,16 @@ public class SecondActivity extends AppCompatActivity {
             String loginRequestObject = "{\"email_id\" : \"JohnDoe@gmail.com\",\"password\" : \"admin123\" }";
             // CONFIGURE RETROFIT LIBRARY OBJECT
             Retrofit retrofit = new Retrofit.Builder()
-                                    .baseUrl(API_URL)
-                                    .addConverterFactory(GsonConverterFactory.create())
-                                    .build();
+                    .baseUrl(API_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
             // CREATE NEW INSTANCE OF LOGIN API SERVICE
             LoginApiService loginApiService = retrofit.create(LoginApiService.class);
             // CREATE NEW REQUEST OBJECT FOR LOGIN API SERVICE
             LoginApiRequestModel loginApiRequestModel = new LoginApiRequestModel.Builder()
-                                                        .email_id("JohnDoe@gmail.com")
-                                                        .password("admin123")
-                                                        .build();
+                    .email_id("JohnDoe@gmail.com")
+                    .password("admin123")
+                    .build();
             // Invokes the webserver and sends a request to it
             Call<LoginApiResponseModel> call = loginApiService.getLoginResponse(loginApiRequestModel);
             // ACTIONS TAKEN ON RESPONSE
@@ -94,7 +89,7 @@ public class SecondActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<LoginApiResponseModel> call, Response<LoginApiResponseModel> response) {
                     LoginApiResponseModel responseModel = response.body();
-                    if(responseModel.isLoginSuccess()) {
+                    if (responseModel.isLoginSuccess()) {
                         // TODO Write an intent and switch to a new activity
                         Toast.makeText(SecondActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     } else {
