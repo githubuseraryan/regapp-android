@@ -39,10 +39,6 @@ public class LoginApiRequestModel {
         private String email_id;
         private String password;
 
-        /* public Builder(String email_id, String password) {
-             this.email_id = email_id;
-             this.password = password;
-         }*/
         public Builder() {
 
         }

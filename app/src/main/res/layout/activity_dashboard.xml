@@ -11,14 +11,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/layout">
 
-
         <ImageView
             android:id="@+id/header_cover_image"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="centerCrop"
-
             android:src="@drawable/nav_menu_header_bg"
             app:srcCompat="@drawable/nav_menu_header_bg" />
 
@@ -38,7 +36,6 @@
             android:src="@drawable/man"
             android:focusable="true" />
 
-
         <RelativeLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
@@ -48,7 +45,6 @@
             android:background="#523A28"
             android:elevation="4dp"
             android:paddingBottom="24dp">
-
 
             <ImageView
                 android:id="@+id/edit"
@@ -93,8 +89,8 @@
                 android:layout_marginTop="10dp"
                 android:text="(Adhyaksh)"
                 android:textColor="#fff"
-                android:textSize="18sp"
-            />
+                android:textSize="18sp" />
+
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,7 +105,6 @@
             android:elevation="4dp"
             android:orientation="vertical"
             android:paddingLeft="5dp"
-
             android:paddingTop="20dp"
             android:paddingRight="5dp"
             android:paddingBottom="20dp" />

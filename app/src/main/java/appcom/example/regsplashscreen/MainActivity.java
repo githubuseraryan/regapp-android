@@ -8,28 +8,32 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int SPLASH_SCREEN_TIME_OUT = 2000;
+    private static final int SPLASH_SCREEN_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        // SELECT THE SPLASH SCREEN LAYOUT
+        setContentView(R.layout.activity_splash_screen);
+
+        // MAKE THE SPLASH SCREEN ACTIVITY COVER FULL SCREEN
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //This method is used so that your splash activity
-        //can cover the entire screen.
+
+        // SWITCH TO SIGN IN SCREEN
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                // INTENT IS USED TO SWITCH FROM ONE ACTIVITY TO ANOTHER
                 Intent i = new Intent(MainActivity.this,
-                        SecondActivity.class);
-                //Intent is used to switch from one activity to another.
+                        SignInActivity.class);
 
+                // INVOKE THE SignInActivity
                 startActivity(i);
-                //invoke the SecondActivity.
 
+                // THE CURRENT ACTIVITY WILL GET FINISHED
                 finish();
-                //the current activity will get finished.
             }
         }, SPLASH_SCREEN_TIME_OUT);
     }
