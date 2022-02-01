@@ -17,13 +17,13 @@
             android:background="@color/colorPrimaryDark">
 
             <ImageView
+                android:id="@+id/ImageView"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/shape_user"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/user" />
-
         </RelativeLayout>
 
         <LinearLayout
@@ -35,6 +35,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
@@ -47,8 +48,9 @@
                 android:autofillHints="Name"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_name"
-                android:inputType="text" />
 
+                android:inputType="text"
+                android:minHeight="48dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,6 +62,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/TextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date_of_birth"
@@ -73,7 +76,6 @@
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/dd_mm_yy"
                 android:inputType="textPassword" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -86,11 +88,11 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+               android:layout_height="wrap_content"
                 android:maxLength="12"
                 android:text="@string/aadhar_number"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -98,8 +100,8 @@
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_aadhar_no"
-                android:inputType="textPassword" />
 
+                android:inputType="textPassword" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,8 +125,8 @@
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_address"
-                android:inputType="textPassword" />
 
+                android:inputType="textPassword" />
         </LinearLayout>
 
 
@@ -149,8 +151,8 @@
                 android:autofillHints="Email"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_email"
-                android:inputType="textEmailAddress" />
 
+                android:inputType="textEmailAddress" />
         </LinearLayout>
 
         <LinearLayout
@@ -174,8 +176,8 @@
                 android:autofillHints="Password"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_password"
-                android:inputType="textPassword" />
-
+                android:inputType="textPassword"
+                android:minHeight="48dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -200,7 +202,6 @@
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_password_again"
                 android:inputType="textPassword" />
-
         </LinearLayout>
 
 
@@ -225,8 +226,8 @@
                 android:autofillHints="Country Name"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/country"
-                android:inputType="textPassword" />
 
+                android:inputType="textPassword" />
         </LinearLayout>
 
         <Button
@@ -259,8 +260,6 @@
                 android:layout_marginStart="20dp"
                 android:text="@string/login"
                 android:textSize="15sp" />
-
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

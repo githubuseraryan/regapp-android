@@ -17,6 +17,7 @@
             android:background="@color/colorPrimaryDark">
 
             <ImageView
+                android:id = "@+id/ProFile_Pic"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -42,6 +43,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/UserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Name"
@@ -67,12 +69,13 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/DOB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/dd_mm_yy"
-                android:inputType="textPassword" />
+                android:inputType="number"  />
 
         </LinearLayout>
 
@@ -93,12 +96,13 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/Aadhar_No"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_aadhar_no"
-                android:inputType="textPassword" />
+                android:inputType="numberSigned" />
 
         </LinearLayout>
 
@@ -118,12 +122,13 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/Postal_Address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_address"
-                android:inputType="textPassword" />
+                android:inputType="textImeMultiLine" />
 
         </LinearLayout>
 
@@ -144,6 +149,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/Email_SignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Email"
@@ -169,6 +175,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/PassWord_SignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Password"
@@ -187,19 +194,21 @@
             android:orientation="vertical">
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/re_password"
+                android:text="Designation"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/Designaion_SignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="Confirm Password"
+                android:autofillHints="Designation"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/enter_password_again"
-                android:inputType="textPassword" />
+                android:hint="Designation"
+                android:inputType="text" />
 
         </LinearLayout>
 
@@ -220,16 +229,18 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id ="@+id/country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Country Name"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/country"
-                android:inputType="textPassword" />
+                android:inputType="text" />
 
         </LinearLayout>
 
         <Button
+            android:id="@+id/sign_up2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"

@@ -15,8 +15,9 @@
         <activity android:name=".Editprofile"></activity>
         <activity android:name=".Dashboard" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".SecondActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".logInactivity" />
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

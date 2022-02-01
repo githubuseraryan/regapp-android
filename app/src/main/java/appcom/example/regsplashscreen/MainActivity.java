@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent i=new Intent(MainActivity.this,
-                        SecondActivity.class);
+                        logInactivity.class);
                 //Intent is used to switch from one activity to another.
 
                 startActivity(i);
-                //invoke the SecondActivity.
+                //invoke the logInactivity.
 
                 finish();
                 //the current activity will get finished.
