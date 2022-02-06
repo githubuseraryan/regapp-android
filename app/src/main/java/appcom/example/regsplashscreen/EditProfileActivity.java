@@ -1,10 +1,10 @@
 package appcom.example.regsplashscreen;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class Editprofile extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

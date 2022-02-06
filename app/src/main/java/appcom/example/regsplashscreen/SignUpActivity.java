@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import appcom.example.regsplashscreen.models.Users;
+import appcom.example.regsplashscreen.model.User;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -56,10 +56,10 @@ public class SignUpActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         if(task.isSuccessful()) {
                             //everyinfo stored in user
-                            Users user = new Users(UserName.getText().toString(), editText1LogIn.getText().toString(), editTextPassword.getText().toString(), Aadhar_No.getText().toString(), DOB.getText().toString(), Address.getText().toString(),Country.getText().toString(),designation.getText().toString());
+                            User user = new User(UserName.getText().toString(), editText1LogIn.getText().toString(), editTextPassword.getText().toString(), Aadhar_No.getText().toString(), DOB.getText().toString(), Address.getText().toString(),Country.getText().toString(),designation.getText().toString());
                             //every info of user stored in database in next two lines
                             String UserId = task.getResult().getUser().getUid();
-                            Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
                             intent.putExtra("ID", UserId);
                             startActivity(intent);
                             database.getReference().child("UsersD").child(UserId).setValue(user);
@@ -70,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
 
-                Intent i = new Intent(SignUpActivity.this, Dashboard.class);
+                Intent i = new Intent(SignUpActivity.this, DashboardActivity.class);
                 startActivity(i);
 
                                       }
@@ -80,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         login.setOnClickListener(v -> {
-            Intent intent=new Intent(SignUpActivity.this, logInactivity.class);
+            Intent intent=new Intent(SignUpActivity.this, SignInActivity.class);
             startActivity(intent);
         });
     }

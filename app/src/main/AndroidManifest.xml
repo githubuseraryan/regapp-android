@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Editprofile"></activity>
-        <activity android:name=".Dashboard" />
+        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".DashboardActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".logInactivity" />
+        <activity android:name=".SignInActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

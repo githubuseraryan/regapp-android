@@ -1,12 +1,5 @@
 package appcom.example.regsplashscreen;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,11 +29,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.Objects;
+import appcom.example.regsplashscreen.model.User;
 
-import appcom.example.regsplashscreen.models.Users;
-
-public class Dashboard extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     ActivityResultLauncher<String> launcher;
     FirebaseDatabase database;
@@ -68,14 +65,14 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot d:snapshot.getChildren()) {
-                    Users Users = d.getValue(Users.class);
-                   String Aadhar= Users.getAadharNo();
-                   String Address= Users.getAddress();
-                   String DOB= Users.getDOB();
-                   String Mail= Users.getMail();
-                  String Username=   Users.getUserName();
-                  String desig_dashboard= Users.getDesignation();
-                  String coun_dashboard=Users.getCountry();
+                    User User = d.getValue(User.class);
+                   String Aadhar= User.getAadharNo();
+                   String Address= User.getAddress();
+                   String DOB= User.getDOB();
+                   String Mail= User.getMail();
+                  String Username=   User.getUserName();
+                  String desig_dashboard= User.getDesignation();
+                  String coun_dashboard= User.getCountry();
                   name.setText(Username);
                   Aadhar_dashboard.setText(Aadhar);
                   Address_dashboard.setText(Address);
@@ -90,7 +87,7 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Dashboard.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
+                Toast.makeText(DashboardActivity.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
 
             }
         });
@@ -141,11 +138,11 @@ public class Dashboard extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Settings:
-                Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DashboardActivity.this, "Settings", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.log_out:
                 mauth.signOut();
-                Intent i = new Intent(Dashboard.this, logInactivity.class);
+                Intent i = new Intent(DashboardActivity.this, SignInActivity.class);
                 startActivity(i);
 
 
