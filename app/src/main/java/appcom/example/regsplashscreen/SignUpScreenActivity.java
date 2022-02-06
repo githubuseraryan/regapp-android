@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import appcom.example.regsplashscreen.model.User;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpScreenActivity extends AppCompatActivity {
 
     private  FirebaseAuth mAuth;
     ProgressDialog progressDialog;
@@ -40,7 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditText designation=findViewById(R.id.Designaion_SignUp);
         ImageView Profile= findViewById(R.id.ProFile_Pic);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        progressDialog= new ProgressDialog(SignUpActivity.this);
+        progressDialog= new ProgressDialog(SignUpScreenActivity.this);
         progressDialog.setTitle("Creating Account");
         progressDialog.setMessage("Creating Account");
 
@@ -63,14 +63,14 @@ public class SignUpActivity extends AppCompatActivity {
                             intent.putExtra("ID", UserId);
                             startActivity(intent);
                             database.getReference().child("UsersD").child(UserId).setValue(user);
-                            Toast.makeText(SignUpActivity.this, "User SignUp SuccessFully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpScreenActivity.this, "User SignUp SuccessFully", Toast.LENGTH_LONG).show();
                         }
                         else
-                            Toast.makeText(SignUpActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpScreenActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
                     }
                 });
 
-                Intent i = new Intent(SignUpActivity.this, DashboardActivity.class);
+                Intent i = new Intent(SignUpScreenActivity.this, DashboardActivity.class);
                 startActivity(i);
 
                                       }
@@ -80,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         login.setOnClickListener(v -> {
-            Intent intent=new Intent(SignUpActivity.this, SignInActivity.class);
+            Intent intent=new Intent(SignUpScreenActivity.this, SignInScreenActivity.class);
             startActivity(intent);
         });
     }

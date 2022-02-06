@@ -16,11 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInScreenActivity extends AppCompatActivity {
 
 
     ProgressDialog progressDialog;
-    FirebaseAuth mauth;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +34,16 @@ public class SignInActivity extends AppCompatActivity {
         EditText edtxtPwd = findViewById(R.id.etPassword);
 
         // SET PROGRESS DIALOG BOX
-        progressDialog = new ProgressDialog(SignInActivity.this);
+        progressDialog = new ProgressDialog(SignInScreenActivity.this);
         progressDialog.setTitle("Logging In");
         progressDialog.setMessage("Logging In");
-        mauth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         // SIGN UP BUTTON LISTENER
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(SignInScreenActivity.this, SignUpScreenActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,22 +53,21 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressDialog.show();
-                mauth.signInWithEmailAndPassword(edtxtEmailId.getText().toString(), edtxtPwd.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(edtxtEmailId.getText().toString(), edtxtPwd.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(SignInActivity.this, DashboardActivity.class);
+                            Intent intent = new Intent(SignInScreenActivity.this, DashboardActivity.class);
                             startActivity(intent);
                         } else
-                            Toast.makeText(SignInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInScreenActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         });
-        if (mauth.getCurrentUser() != null) {
-            Intent intent = new Intent(SignInActivity.this, DashboardActivity.class);
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(SignInScreenActivity.this, DashboardActivity.class);
             startActivity(intent);
         }
     }

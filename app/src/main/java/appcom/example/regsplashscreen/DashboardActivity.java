@@ -32,62 +32,60 @@ import com.google.firebase.storage.UploadTask;
 import appcom.example.regsplashscreen.model.User;
 
 public class DashboardActivity extends AppCompatActivity {
-    FirebaseAuth mauth;
+    FirebaseAuth mAuth;
     ActivityResultLauncher<String> launcher;
-    FirebaseDatabase database;
-    FirebaseStorage storeage;
+    FirebaseDatabase mDatabase;
+    FirebaseStorage mStorage;
     DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        //Menu menu1= (Menu) menu1.findItem(R.id.log_out);
-        database = FirebaseDatabase.getInstance();
-        storeage = FirebaseStorage.getInstance();
-        mauth=FirebaseAuth.getInstance();
+
+        mDatabase = FirebaseDatabase.getInstance();
+        mStorage = FirebaseStorage.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         ImageButton profilePicEditor = findViewById(R.id.edit);
         ImageView picture = findViewById(R.id.ProFile_Pic);
-        TextView name= findViewById(R.id.name);
-        TextView Address_dashboard= findViewById(R.id.Address_Dashboard);
-        TextView Designation_dashboard= findViewById(R.id.Designation_Dashboard);
-        TextView DOB_dashboard= findViewById(R.id.DOB_Dashboard);
-        TextView Mail_dashboard= findViewById(R.id.Mail_Dashboard);
-        TextView Country_dashboard = findViewById(R.id.Country_Dashboard);
-        TextView Aadhar_dashboard = findViewById(R.id.AadharNO_Dashboard);
-        TextView Username_dashboard = findViewById(R.id.UserName_Dashboard);
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("ID");
-        ref=database.getReference().child("UsersD");
+        TextView name = findViewById(R.id.name);
+        TextView addressDashboard = findViewById(R.id.address_dashboard);
+        TextView designationDashboard = findViewById(R.id.designation_dashboard);
+        TextView dobDashboard = findViewById(R.id.dob_dashboard);
+        TextView emailIdDashboard = findViewById(R.id.email_id_dashboard);
+        TextView countryDashboard = findViewById(R.id.country_dashboard);
+        TextView aadharNoDashboard = findViewById(R.id.aadhar_no_Dashboard);
 
+        TextView usernameDashboard = findViewById(R.id.username_dashboard);
+
+        ref = mDatabase.getReference().child("users");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot d:snapshot.getChildren()) {
-                    User User = d.getValue(User.class);
-                   String Aadhar= User.getAadharNo();
-                   String Address= User.getAddress();
-                   String DOB= User.getDOB();
-                   String Mail= User.getMail();
-                  String Username=   User.getUserName();
-                  String desig_dashboard= User.getDesignation();
-                  String coun_dashboard= User.getCountry();
-                  name.setText(Username);
-                  Aadhar_dashboard.setText(Aadhar);
-                  Address_dashboard.setText(Address);
-                  Username_dashboard.setText(Username);
-                  Mail_dashboard.setText(Mail);
-                  DOB_dashboard.setText(DOB);
-                  Designation_dashboard.setText(desig_dashboard);
-                  Country_dashboard.setText(coun_dashboard);
-
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if (user != null) {
+                    String aadharNo = user.getAadharNo();
+                    String address = user.getAddress();
+                    String dob = user.getDob();
+                    String emailId = user.getEmailId();
+                    String userName = user.getUserName();
+                    String designation = user.getDesignation();
+                    String country = user.getCountry();
+                    name.setText(userName);
+                    aadharNoDashboard.setText(aadharNo);
+                    addressDashboard.setText(address);
+                    usernameDashboard.setText(userName);
+                    emailIdDashboard.setText(emailId);
+                    dobDashboard.setText(dob);
+                    designationDashboard.setText(designation);
+                    countryDashboard.setText(country);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(DashboardActivity.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
+                Toast.makeText(DashboardActivity.this, "Something Went Wrong", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -95,14 +93,14 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onActivityResult(Uri uri) {
                 picture.setImageURI(uri);
-                StorageReference reference = storeage.getReference().child("image");
+                StorageReference reference = mStorage.getReference().child("image");
                 reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                database.getReference().child("ProfilePic").setValue(uri.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                mDatabase.getReference().child("ProfilePic").setValue(uri.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(getApplicationContext(), "Image Uploaded", Toast.LENGTH_LONG).show();
@@ -141,14 +139,13 @@ public class DashboardActivity extends AppCompatActivity {
                 Toast.makeText(DashboardActivity.this, "Settings", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.log_out:
-                mauth.signOut();
-                Intent i = new Intent(DashboardActivity.this, SignInActivity.class);
+                mAuth.signOut();
+                Intent i = new Intent(DashboardActivity.this, SignInScreenActivity.class);
                 startActivity(i);
 
 
         }
         return true;
     }
-
 
 }

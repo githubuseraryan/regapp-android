@@ -200,7 +200,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/UserName_Dashboard"
+                android:id="@+id/username_dashboard"
                 android:layout_width="172dp"
                 android:layout_height="40dp"
                 android:layout_margin="5dp"
@@ -213,7 +213,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/AadharNO_Dashboard"
+                android:id="@+id/aadhar_no_Dashboard"
                 android:layout_width="175dp"
                 android:layout_height="40dp"
                 android:layout_margin="5dp"
@@ -224,10 +224,10 @@
                 android:text="01/01/2022"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/Mail_Dashboard" />
+                app:layout_constraintTop_toBottomOf="@+id/email_id_dashboard" />
 
             <TextView
-                android:id="@+id/Mail_Dashboard"
+                android:id="@+id/email_id_dashboard"
                 android:layout_width="169dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="8dp"
@@ -237,10 +237,10 @@
                 android:text="UnMarried"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/Country_Dashboard" />
+                app:layout_constraintTop_toBottomOf="@+id/country_dashboard" />
 
             <TextView
-                android:id="@+id/Country_Dashboard"
+                android:id="@+id/country_dashboard"
                 android:layout_width="172dp"
                 android:layout_height="37dp"
                 android:layout_margin="5dp"
@@ -250,10 +250,10 @@
                 android:text="Female"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/Address_Dashboard" />
+                app:layout_constraintTop_toBottomOf="@+id/address_dashboard" />
 
             <TextView
-                android:id="@+id/Designation_Dashboard"
+                android:id="@+id/designation_dashboard"
                 android:layout_width="168dp"
                 android:layout_height="41dp"
                 android:layout_margin="5dp"
@@ -267,7 +267,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <TextView
-                android:id="@+id/Address_Dashboard"
+                android:id="@+id/address_dashboard"
                 android:layout_width="170dp"
                 android:layout_height="47dp"
                 android:layout_margin="5dp"
@@ -278,7 +278,7 @@
                 android:text="987654321"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/Designation_Dashboard" />
+                app:layout_constraintTop_toBottomOf="@+id/designation_dashboard" />
 
             <TextView
                 android:id="@+id/approved_by"
@@ -303,7 +303,7 @@
                 android:text="marothiatechs@gmail.com"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/textView27"
-                app:layout_constraintTop_toBottomOf="@+id/AadharNO_Dashboard" />
+                app:layout_constraintTop_toBottomOf="@+id/aadhar_no_Dashboard" />
 
             <TextView
                 android:id="@+id/textView26"
@@ -344,7 +344,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <TextView
-                android:id="@+id/DOB_Dashboard"
+                android:id="@+id/dob_dashboard"
                 android:layout_width="154dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="8dp"

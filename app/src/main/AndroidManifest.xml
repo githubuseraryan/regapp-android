@@ -14,8 +14,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".EditProfileActivity"></activity>
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".SignInActivity" />
+        <activity android:name=".SignUpScreenActivity" />
+        <activity android:name=".SignInScreenActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

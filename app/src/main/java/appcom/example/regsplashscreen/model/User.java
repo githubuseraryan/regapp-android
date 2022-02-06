@@ -2,134 +2,131 @@ package appcom.example.regsplashscreen.model;
 
 public class User {
 
+    String profilePic;
+    String userName;
+    String emailId;
+    String password;
+    String aadharNo;
+    String dob;
+    String userId;
+    String address;
+    String age;
+    String country;
+    String designation;
 
-    String ProfilePic;
-    String UserName;
-    String Mail;
-    String Password;
-    String AadharNo;
-    String DOB;
-    String UserId;
-    String Address;
-    String Age;
-    String Country;
-    String Designation;
-
-    public User(String profilePic, String userName, String mail, String password, String aadharNo, String DOB, String userId, String address, String Age, String country) {
-        ProfilePic = profilePic;
-        UserName = userName;
-        Mail = mail;
-        Password = password;
-        AadharNo = aadharNo;
-        this.DOB = DOB;
-        UserId = userId;
-        Address = address;
-        this.Age = Age;
-        Country = country;
-
-
+    public User(String profilePic, String userName, String emailId, String password, String aadharNo, String dob, String userId, String address, String age, String country) {
+        this.profilePic = profilePic;
+        this.userName = userName;
+        this.emailId = emailId;
+        this.password = password;
+        this.aadharNo = aadharNo;
+        this.dob = dob;
+        this.userId = userId;
+        this.address = address;
+        this.age = age;
+        this.country = country;
     }
 
-    public User() {
+    private User() {
     }
 
     public User(String userName,
-                String mail,
+                String emailId,
                 String password,
                 String aadharNo,
-                String DOB,
+                String dob,
                 String address,
                 String country,
                 String designation) {
-        UserName = userName;
-        Mail = mail;
-        Password = password;
-        AadharNo = aadharNo;
-        this.DOB = DOB;
-        Address = address;
-        Country = country;
-        Designation = designation;
+        this.userName = userName;
+        this.emailId = emailId;
+        this.password = password;
+        this.aadharNo = aadharNo;
+        this.dob = dob;
+        this.address = address;
+        this.country = country;
+        this.designation = designation;
 
 
     }
 
     public String getProfilePic() {
-        return ProfilePic;
+        return profilePic;
     }
 
     public void setProfilePic(String profilePic) {
-        ProfilePic = profilePic;
+        this.profilePic = profilePic;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
-    public String getMail() {
-        return Mail;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setMail(String mail) {
-        Mail = mail;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getAadharNo() {
-        return AadharNo;
+        return aadharNo;
     }
 
     public void setAadharNo(String aadharNo) {
-        AadharNo = aadharNo;
+        this.aadharNo = aadharNo;
     }
 
-    public String getDOB() {
-        return DOB;
+    public String getDob() {
+        return dob;
     }
 
-    public void setDOB(String DOB) {
-        this.DOB = DOB;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     public String getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(String userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
     public void setCountry(String country) {
-        Country = country;
+        this.country = country;
     }
 
     public String getDesignation() {
-        return Designation;
+        return designation;
     }
 
     public void setDesignation(String designation) {
-        Designation = designation;
+        this.designation = designation;
     }
 }
