@@ -48,7 +48,7 @@ public class DashboardActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         ImageButton profilePicEditor = findViewById(R.id.edit);
-        ImageView picture = findViewById(R.id.ProFile_Pic);
+        ImageView picture = findViewById(R.id.profile_pic);
         TextView name = findViewById(R.id.name);
         TextView addressDashboard = findViewById(R.id.address_dashboard);
         TextView designationDashboard = findViewById(R.id.designation_dashboard);
@@ -116,10 +116,7 @@ public class DashboardActivity extends AppCompatActivity {
         profilePicEditor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 launcher.launch("Images/*");
-
-
             }
         });
 
@@ -142,8 +139,6 @@ public class DashboardActivity extends AppCompatActivity {
                 mAuth.signOut();
                 Intent i = new Intent(DashboardActivity.this, SignInScreenActivity.class);
                 startActivity(i);
-
-
         }
         return true;
     }

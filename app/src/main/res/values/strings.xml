@@ -22,4 +22,5 @@
     <string name="enter_aadhar_no">Enter Aadhar No</string>
     <string name="postal_address">Postal Address</string>
     <string name="enter_address">Enter Address</string>
+    <string name="designation">Designation</string>
 </resources>

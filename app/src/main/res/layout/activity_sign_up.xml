@@ -13,11 +13,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="142dp"
             android:background="@color/colorPrimaryDark">
 
             <ImageView
-                android:id = "@+id/ProFile_Pic"
+                android:id = "@+id/profile_pic"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -43,7 +43,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/UserName"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Name"
@@ -69,7 +69,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/DOB"
+                android:id="@+id/dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
@@ -90,13 +90,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLength="12"
+                android:maxLength="15"
                 android:text="@string/aadhar_number"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/Aadhar_No"
+                android:id="@+id/aadhar_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
@@ -122,7 +122,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/Postal_Address"
+                android:id="@+id/postal_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
@@ -149,7 +149,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/Email_SignUp"
+                android:id="@+id/email_id_sign_up_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Email"
@@ -175,7 +175,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/PassWord_SignUp"
+                android:id="@+id/password_sign_up_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Password"
@@ -197,17 +197,17 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Designation"
+                android:text="@string/designation"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/Designaion_SignUp"
+                android:id="@+id/designation_sign_up_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Designation"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="Designation"
+                android:hint="@string/designation"
                 android:inputType="text" />
 
         </LinearLayout>
@@ -240,7 +240,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/sign_up2"
+            android:id="@+id/sign_up_screen_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -257,14 +257,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="187dp"
-                android:layout_height="38dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/already_account"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/login_buttom"
+                android:id="@+id/login_button"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

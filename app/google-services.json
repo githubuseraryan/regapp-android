@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "254507971791",
-    "project_id": "reg-splashscreen-df5ab",
-    "storage_bucket": "reg-splashscreen-df5ab.appspot.com"
+    "project_number": "700805889189",
+    "project_id": "regapp-db",
+    "storage_bucket": "regapp-db.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:254507971791:android:1d915699b89f85e1dfb3ba",
+        "mobilesdk_app_id": "1:700805889189:android:53687fec74c3467038614c",
         "android_client_info": {
           "package_name": "appcom.example.regsplashscreen"
         }
       },
       "oauth_client": [
         {
-          "client_id": "254507971791-8hijjjck12rrl3o9nhli79vjr581ibji.apps.googleusercontent.com",
+          "client_id": "700805889189-sgp75l6j0j5kdvik4bbs3vrl9u8folep.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDA-Xr4uHWZ0rJmawV_MYLpsNBIkM37ROA"
+          "current_key": "AIzaSyAQV0aTVwjPvmbW7Ku389zOZqXbYXtIqpQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "254507971791-8hijjjck12rrl3o9nhli79vjr581ibji.apps.googleusercontent.com",
+              "client_id": "700805889189-sgp75l6j0j5kdvik4bbs3vrl9u8folep.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

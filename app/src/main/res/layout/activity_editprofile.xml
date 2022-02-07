@@ -254,7 +254,7 @@
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/login_buttom"
+                android:id="@+id/login_button"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
