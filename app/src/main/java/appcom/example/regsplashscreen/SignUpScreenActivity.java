@@ -3,20 +3,16 @@ package appcom.example.regsplashscreen;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 import appcom.example.regsplashscreen.model.User;
 
@@ -44,7 +40,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
         EditText edtCountry = findViewById(R.id.country);
         EditText edtDesignation = findViewById(R.id.designation_sign_up_screen);
 
-        ImageView profilePic = findViewById(R.id.profile_pic);
+        // ImageView profilePic = findViewById(R.id.profile_pic);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         progressDialog = new ProgressDialog(SignUpScreenActivity.this);
@@ -53,31 +49,23 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.show();
-                mAuth.createUserWithEmailAndPassword(edtEmailId.getText().toString(), edtPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()) {
-                            // STORE USER DETAILS IN MODEL
-                            User user = new User(edtUserName.getText().toString(), edtEmailId.getText().toString(), edtPassword.getText().toString(), edtAadharNo.getText().toString(), edtDOB.getText().toString(), edtAddress.getText().toString(), edtCountry.getText().toString(), edtDesignation.getText().toString());
-                            //every info of user stored in database in next two lines
-                            String userId = task.getResult().getUser().getUid();
-                            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-                            intent.putExtra("uid", userId);
-                            startActivity(intent);
-                            database.getReference().child("users").child(userId).setValue(user);
-                            Toast.makeText(SignUpScreenActivity.this, "User signed up successfully", Toast.LENGTH_LONG).show();
-                        } else
-                            Toast.makeText(SignUpScreenActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-                Intent i = new Intent(SignUpScreenActivity.this, DashboardActivity.class);
-                startActivity(i);
-            }
+        signUp.setOnClickListener(v -> {
+            progressDialog.show();
+            mAuth.createUserWithEmailAndPassword(edtEmailId.getText().toString(), edtPassword.getText().toString()).addOnCompleteListener(task -> {
+                progressDialog.dismiss();
+                if (task.isSuccessful()) {
+                    // STORE USER DETAILS IN MODEL
+                    User user = new User(mAuth.getUid(), edtUserName.getText().toString(), edtEmailId.getText().toString(), edtPassword.getText().toString(), edtAadharNo.getText().toString(), edtDOB.getText().toString(), edtAddress.getText().toString(), edtCountry.getText().toString(), edtDesignation.getText().toString());
+                    String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
+                    // SET VALUE IN DATABASE
+                    database.getReference().child("users").child(userId).setValue(user);
+                    // SWITCH TO SIGN IN SCREEN ONCE USER IS REGISTERED IN THE DATABASE
+                    Intent intent = new Intent(getApplicationContext(), SignInScreenActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(SignUpScreenActivity.this, "User signed up successfully", Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(SignUpScreenActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
+            });
         });
 
 

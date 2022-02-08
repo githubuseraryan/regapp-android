@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "700805889189",
+    "firebase_url": "https://regapp-db-default-rtdb.firebaseio.com",
     "project_id": "regapp-db",
     "storage_bucket": "regapp-db.appspot.com"
   },

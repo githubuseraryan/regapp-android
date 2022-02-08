@@ -1,24 +1,19 @@
 package appcom.example.regsplashscreen;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,8 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import appcom.example.regsplashscreen.model.User;
 
@@ -56,30 +49,35 @@ public class DashboardActivity extends AppCompatActivity {
         TextView emailIdDashboard = findViewById(R.id.email_id_dashboard);
         TextView countryDashboard = findViewById(R.id.country_dashboard);
         TextView aadharNoDashboard = findViewById(R.id.aadhar_no_Dashboard);
-
         TextView usernameDashboard = findViewById(R.id.username_dashboard);
 
+        mAuth = FirebaseAuth.getInstance();
+        String uid = mAuth.getUid();
         ref = mDatabase.getReference().child("users");
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                if (user != null) {
-                    String aadharNo = user.getAadharNo();
-                    String address = user.getAddress();
-                    String dob = user.getDob();
-                    String emailId = user.getEmailId();
-                    String userName = user.getUserName();
-                    String designation = user.getDesignation();
-                    String country = user.getCountry();
-                    name.setText(userName);
-                    aadharNoDashboard.setText(aadharNo);
-                    addressDashboard.setText(address);
-                    usernameDashboard.setText(userName);
-                    emailIdDashboard.setText(emailId);
-                    dobDashboard.setText(dob);
-                    designationDashboard.setText(designation);
-                    countryDashboard.setText(country);
+                for (DataSnapshot item: dataSnapshot.getChildren()) {
+                    if (item.getKey().equals(uid))
+                    {
+                        User user= item.getValue(User.class);
+                        String aadharNo = user.getAadharNo();
+                        String address = user.getAddress();
+                        String dob = user.getDob();
+                        String emailId = user.getEmailId();
+                        String userName = user.getUserName();
+                        String designation = user.getDesignation();
+                        String country = user.getCountry();
+                        name.setText(userName);
+                        aadharNoDashboard.setText(aadharNo);
+                        addressDashboard.setText(address);
+                        usernameDashboard.setText(userName);
+                        emailIdDashboard.setText(emailId);
+                        dobDashboard.setText(dob);
+                        designationDashboard.setText(designation);
+                        countryDashboard.setText(country);
+                    }
                 }
             }
 
@@ -89,7 +87,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             }
         });
-        launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+        /*launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri uri) {
                 picture.setImageURI(uri);
@@ -111,15 +109,15 @@ public class DashboardActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
 
-        profilePicEditor.setOnClickListener(new View.OnClickListener() {
+
+        /*profilePicEditor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launcher.launch("Images/*");
             }
-        });
-
+        });*/
     }
 
     @Override

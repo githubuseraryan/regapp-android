@@ -2,35 +2,22 @@ package appcom.example.regsplashscreen.model;
 
 public class User {
 
-    String profilePic;
-    String userName;
-    String emailId;
-    String password;
-    String aadharNo;
-    String dob;
-    String userId;
-    String address;
-    String age;
-    String country;
-    String designation;
-
-    public User(String profilePic, String userName, String emailId, String password, String aadharNo, String dob, String userId, String address, String age, String country) {
-        this.profilePic = profilePic;
-        this.userName = userName;
-        this.emailId = emailId;
-        this.password = password;
-        this.aadharNo = aadharNo;
-        this.dob = dob;
-        this.userId = userId;
-        this.address = address;
-        this.age = age;
-        this.country = country;
-    }
+    private String uid;
+    private String userName;
+    private String emailId;
+    private String password;
+    private String aadharNo;
+    private String dob;
+    private String userId;
+    private String address;
+    private String country;
+    private String designation;
 
     private User() {
     }
 
-    public User(String userName,
+    public User(String uid,
+                String userName,
                 String emailId,
                 String password,
                 String aadharNo,
@@ -46,16 +33,14 @@ public class User {
         this.address = address;
         this.country = country;
         this.designation = designation;
-
-
     }
 
-    public String getProfilePic() {
-        return profilePic;
+    public String getUid() {
+        return uid;
     }
 
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getUserName() {
