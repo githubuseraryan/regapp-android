@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <ImageView
@@ -19,16 +19,14 @@
             android:layout_height="150dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="centerCrop"
-
             android:src="@drawable/nav_menu_header_bg"
-            app:srcCompat="@drawable/nav_menu_header_bg" />
+            app:srcCompat="@drawable/nav_menu_header_bg"
+            android:contentDescription="@string/profile_pic" />
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-
             android:id="@+id/profile"
             android:layout_width="200dp"
             android:layout_height="200dp"
-
             android:layout_below="@+id/header_cover_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-130dp"
@@ -38,7 +36,8 @@
             android:scaleType="centerCrop"
             android:src="@drawable/man"
             app:civ_border_color="#FFFFFFFF"
-            app:civ_border_width="3dp" />
+            app:civ_border_width="3dp"
+            android:focusable="true" />
 
 
         <RelativeLayout
@@ -47,17 +46,16 @@
             android:layout_height="208dp"
             android:layout_below="@+id/header_cover_image"
             android:layout_marginTop="-19dp"
-            android:background="#523A28"
+            android:background="#FFFFFF"
             android:elevation="4dp"
             android:paddingBottom="24dp">
-
 
             <ImageButton
                 android:id="@+id/edit"
                 android:layout_width="57dp"
                 android:layout_height="66dp"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="338dp"
                 android:layout_marginLeft="16dp"
@@ -66,6 +64,8 @@
                 android:layout_marginBottom="126dp"
                 android:background="#2B0F0A"
                 android:clickable="true"
+                android:contentDescription="@string/profile_pic"
+                android:focusable="true"
                 android:src="@android:drawable/ic_menu_edit" />
 
             <TextView
@@ -74,8 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="70dp"
-                android:text="Mouli Deshmukhya"
-                android:textColor="#fff"
+                android:text="@string/name"
+                android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -86,8 +86,8 @@
                 android:layout_below="@+id/Designation_dashboard"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="Asansol"
-                android:textColor="#fff"
+                android:text="@string/country"
+                android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
@@ -98,7 +98,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="Auditor"
-                android:textColor="#fff"
+                android:textColor="#000000"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -114,7 +114,7 @@
             android:layout_marginEnd="-3dp"
             android:layout_marginBottom="0dp"
 
-            android:background="#228280"
+            android:background="#FFFFFF"
             android:elevation="4dp"
             android:orientation="vertical"
             android:paddingLeft="5dp"
