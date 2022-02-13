@@ -48,7 +48,6 @@
                 android:autofillHints="Name"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_name"
-
                 android:inputType="text"
                 android:minHeight="48dp" />
         </LinearLayout>
@@ -100,7 +99,6 @@
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_aadhar_no"
-
                 android:inputType="textPassword" />
         </LinearLayout>
 

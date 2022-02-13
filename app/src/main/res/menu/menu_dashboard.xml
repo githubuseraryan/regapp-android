@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id="@+id/log_out"
-    android:title="Log-Out"/>
+
     <item
-        android:id="@+id/Settings"
-        android:title="settings"/>
+        android:id="@+id/edit_profile"
+        android:title="@string/edit_profile" />
+    <item
+        android:id="@+id/sign_out"
+        android:title="@string/sign_out" />
+
 
 
 </menu>

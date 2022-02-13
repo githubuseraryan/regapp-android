@@ -261,11 +261,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/already_account"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/login_button"
-                android:layout_width="145dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:text="@string/login"

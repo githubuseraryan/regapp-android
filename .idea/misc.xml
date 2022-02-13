@@ -3,14 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_dashboard.xml" value="0.1539855072463768" />
+        <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_dashboard.xml" value="0.16" />
+        <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_dashboard_screen.xml" value="0.5" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_editprofile.xml" value="0.1" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_login.xml" value="0.35625" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_main.xml" value="0.15625" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_second.xml" value="0.2535804549283909" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
-        <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
+        <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_sign_up.xml" value="0.17447495961227788" />
+        <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.1" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_splash_screen.xml" value="0.16875" />
+        <entry key="..\:/Projects/regapp-android/app/src/main/res/menu/menu_dashboard.xml" value="0.33" />
       </map>
     </option>
   </component>

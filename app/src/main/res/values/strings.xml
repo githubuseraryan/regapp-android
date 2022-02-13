@@ -10,8 +10,8 @@
     <string name="enter_password_again">Confirm Password</string>
     <string name="sign_up">Sign up</string>
     <string name="already_account">Already have an account ?</string>
-    <string name="login">Login</string>
-    <string name="sign_in">Sign in</string>
+    <string name="login">Sign In</string>
+    <string name="sign_in">Sign In</string>
     <string name="forgot_text">Forgot Password?</string>
     <string name="sign_in_google">Sign in with google</string>
     <string name="no_account">"Don't have an account ?</string>
@@ -24,4 +24,8 @@
     <string name="enter_address">Enter Address</string>
     <string name="designation">Designation</string>
     <string name="profile_pic">Profile Picture</string>
+    <string name="username">User name</string>
+    <string name="approved_by_inst_name">NIELIT India</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="sign_out">Sign out</string>
 </resources>

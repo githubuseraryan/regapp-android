@@ -34,23 +34,28 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_dashboard_screen);
 
         mDatabase = FirebaseDatabase.getInstance();
         mStorage = FirebaseStorage.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        ImageButton profilePicEditor = findViewById(R.id.edit);
+        ImageButton profilePicEditor = findViewById(R.id.ds_edit_button);
         ImageView picture = findViewById(R.id.profile_pic);
-        TextView name = findViewById(R.id.name);
-        TextView addressDashboard = findViewById(R.id.address_dashboard);
-        TextView designationDashboard = findViewById(R.id.designation_dashboard);
-        TextView dobDashboard = findViewById(R.id.dob_dashboard);
-        TextView emailIdDashboard = findViewById(R.id.email_id_dashboard);
-        TextView countryDashboard = findViewById(R.id.country_dashboard);
-        TextView aadharNoDashboard = findViewById(R.id.aadhar_no_Dashboard);
-        TextView usernameDashboard = findViewById(R.id.username_dashboard);
 
+        TextView header_username = findViewById(R.id.ds_header_username);
+        TextView header_designation = findViewById(R.id.ds_header_designation);
+        TextView header_country = findViewById(R.id.ds_header_country);
+
+        TextView details_address = findViewById(R.id.ds_tv_address_val);
+        TextView details_designation = findViewById(R.id.ds_tv_designation_val);
+        TextView details_dob = findViewById(R.id.ds_tv_dob_val);
+        TextView details_email_id = findViewById(R.id.ds_tv_email_id_val);
+        TextView details_country = findViewById(R.id.ds_tv_country_val);
+        TextView details_aadhar_no = findViewById(R.id.ds_tv_aadhar_no_val);
+        TextView details_username = findViewById(R.id.ds_tv_username_val);
+
+        // FIREBASE AUTH DETAILS
         mAuth = FirebaseAuth.getInstance();
         String uid = mAuth.getUid();
         ref = mDatabase.getReference().child("users");
@@ -69,14 +74,16 @@ public class DashboardActivity extends AppCompatActivity {
                         String userName = user.getUserName();
                         String designation = user.getDesignation();
                         String country = user.getCountry();
-                        name.setText(userName);
-                        aadharNoDashboard.setText(aadharNo);
-                        addressDashboard.setText(address);
-                        usernameDashboard.setText(userName);
-                        emailIdDashboard.setText(emailId);
-                        dobDashboard.setText(dob);
-                        designationDashboard.setText(designation);
-                        countryDashboard.setText(country);
+                        header_username.setText(userName);
+                        header_designation.setText(designation);
+                        header_country.setText(country);
+                        details_aadhar_no.setText(aadharNo);
+                        details_address.setText(address);
+                        details_username.setText(userName);
+                        details_email_id.setText(emailId);
+                        details_dob.setText(dob);
+                        details_designation.setText(designation);
+                        details_country.setText(country);
                     }
                 }
             }
@@ -130,10 +137,10 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.Settings:
-                Toast.makeText(DashboardActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+            case R.id.edit_profile:
+                Toast.makeText(DashboardActivity.this, "Edit profile", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.log_out:
+            case R.id.sign_out:
                 mAuth.signOut();
                 Intent i = new Intent(DashboardActivity.this, SignInScreenActivity.class);
                 startActivity(i);

@@ -2,8 +2,6 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +9,6 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
         <ImageView
             android:id="@+id/header_cover_image"
@@ -23,7 +20,7 @@
             app:srcCompat="@drawable/nav_menu_header_bg"
             android:contentDescription="@string/profile_pic" />
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile"
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -39,7 +36,6 @@
             app:civ_border_width="3dp"
             android:focusable="true" />
 
-
         <RelativeLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
@@ -51,7 +47,7 @@
             android:paddingBottom="24dp">
 
             <ImageButton
-                android:id="@+id/edit"
+                android:id="@+id/ds_edit_button"
                 android:layout_width="57dp"
                 android:layout_height="66dp"
                 android:layout_alignParentStart="true"
@@ -69,35 +65,38 @@
                 android:src="@android:drawable/ic_menu_edit" />
 
             <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
+                android:id="@+id/ds_header_username"
+                android:layout_width="192dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="70dp"
                 android:text="@string/name"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/country_Dashboard"
-                android:layout_width="wrap_content"
+                android:id="@+id/ds_header_country"
+                android:layout_width="91dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Designation_dashboard"
+                android:layout_below="@+id/ds_header_designation"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="@string/country"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/Designation_dashboard"
-                android:layout_width="wrap_content"
+                android:id="@+id/ds_header_designation"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
+                android:layout_below="@+id/ds_header_username"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="Auditor"
+                android:text="@string/designation"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -113,7 +112,6 @@
             android:layout_marginTop="-2dp"
             android:layout_marginEnd="-3dp"
             android:layout_marginBottom="0dp"
-
             android:background="#FFFFFF"
             android:elevation="4dp"
             android:orientation="vertical"
@@ -123,238 +121,195 @@
             android:paddingBottom="20dp">
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="145dp"
-                android:layout_height="31dp"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:text="DOB "
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="147dp"
-                android:layout_height="33dp"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:text="Designation "
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="140dp"
-                android:layout_height="36dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="5dp"
-                android:clickable="true"
-                android:text="Aadhar"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="147dp"
-                android:layout_height="46dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="4dp"
-                android:clickable="true"
-                android:text="Mail"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="150dp"
-                android:layout_height="37dp"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-
-                android:clickable="true"
-                android:text="Country "
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-            <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/ds_tv_username_key"
                 android:layout_width="145dp"
                 android:layout_height="38dp"
                 android:layout_margin="5dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:clickable="true"
-                android:text="Username "
+                android:focusable="true"
+                android:text="@string/username"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/username_dashboard"
-                android:layout_width="172dp"
-                android:layout_height="40dp"
+                android:id="@+id/ds_tv_dob_key"
+                android:layout_width="145dp"
+                android:layout_height="31dp"
                 android:layout_margin="5dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="8dp"
                 android:clickable="true"
-                android:text="O+"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:focusable="true"
+                android:text="@string/date_of_birth"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_username_key" />
 
             <TextView
-                android:id="@+id/aadhar_no_Dashboard"
-                android:layout_width="175dp"
-                android:layout_height="40dp"
+                android:id="@+id/ds_tv_designation_key"
+                android:layout_width="147dp"
+                android:layout_height="33dp"
                 android:layout_margin="5dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="12dp"
-                android:clickable="true"
-                android:text="01/01/2022"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/email_id_dashboard" />
-
-            <TextView
-                android:id="@+id/email_id_dashboard"
-                android:layout_width="169dp"
-                android:layout_height="32dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:clickable="true"
-                android:text="UnMarried"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView15"
-                app:layout_constraintTop_toBottomOf="@+id/country_dashboard" />
-
-            <TextView
-                android:id="@+id/country_dashboard"
-                android:layout_width="172dp"
-                android:layout_height="37dp"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:clickable="true"
-                android:text="Female"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/address_dashboard" />
-
-            <TextView
-                android:id="@+id/designation_dashboard"
-                android:layout_width="168dp"
-                android:layout_height="41dp"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:clickable="true"
-                android:text="JOB"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <TextView
-                android:id="@+id/address_dashboard"
-                android:layout_width="170dp"
-                android:layout_height="47dp"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="212dp"
-                android:layout_marginEnd="12dp"
-                android:clickable="true"
-                android:text="987654321"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/designation_dashboard" />
-
-            <TextView
-                android:id="@+id/approved_by"
-                android:layout_width="158dp"
-                android:layout_height="41dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="24dp"
-                android:clickable="true"
-                android:text="NIELIT India"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView26"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
-
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="138dp"
-                android:layout_height="3dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:clickable="true"
-                android:text="marothiatechs@gmail.com"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView27"
-                app:layout_constraintTop_toBottomOf="@+id/aadhar_no_Dashboard" />
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="135dp"
-                android:layout_height="56dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="5dp"
-                android:clickable="true"
-
-                android:text="Approved by: "
+                android:focusable="true"
+                android:text="@string/designation"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_dob_key" />
 
             <TextView
-                android:id="@+id/textView27"
-                android:layout_width="138dp"
-                android:layout_height="1dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="5dp"
-                android:clickable="true"
-                android:text="Email: "
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-            <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/ds_tv_address_key"
                 android:layout_width="155dp"
                 android:layout_height="36dp"
                 android:layout_margin="5dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
                 android:clickable="true"
-                android:text="Address "
+                android:text="@string/postal_address"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_designation_key"
+                android:focusable="true" />
 
             <TextView
-                android:id="@+id/dob_dashboard"
+                android:id="@+id/ds_tv_aadhar_no_key"
+                android:layout_width="140dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/aadhar_number"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_email_key" />
+
+            <TextView
+                android:id="@+id/ds_tv_email_key"
+                android:layout_width="147dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/email"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_country_key" />
+
+            <TextView
+                android:id="@+id/ds_tv_country_key"
+                android:layout_width="150dp"
+                android:layout_height="37dp"
+                android:layout_margin="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/country"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_address_key" />
+
+            <TextView
+                android:id="@+id/ds_tv_username_val"
+                android:layout_width="172dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ds_tv_username_key"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ds_tv_dob_val"
                 android:layout_width="154dp"
                 android:layout_height="32dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
                 android:clickable="true"
-                android:text="CMA"
+                android:focusable="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintLeft_toRightOf="@+id/ds_tv_dob_key"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_username_key" />
+
+            <TextView
+                android:id="@+id/ds_tv_designation_val"
+                android:layout_width="168dp"
+                android:layout_height="41dp"
+                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ds_tv_designation_key"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_dob_key" />
+
+            <TextView
+                android:id="@+id/ds_tv_address_val"
+                android:layout_width="170dp"
+                android:layout_height="47dp"
+                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="212dp"
+                android:layout_marginEnd="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ds_tv_address_key"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_designation_val" />
+
+            <TextView
+                android:id="@+id/ds_tv_country_val"
+                android:layout_width="172dp"
+                android:layout_height="37dp"
+                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ds_tv_country_key"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_address_val" />
+
+            <TextView
+                android:id="@+id/ds_tv_email_id_val"
+                android:layout_width="169dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ds_tv_email_key"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_country_val"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/ds_tv_aadhar_no_val"
+                android:layout_width="175dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ds_tv_aadhar_no_key"
+                app:layout_constraintTop_toBottomOf="@+id/ds_tv_email_id_val" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 </ScrollView>

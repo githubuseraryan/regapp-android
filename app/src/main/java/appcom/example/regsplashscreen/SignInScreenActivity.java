@@ -22,7 +22,7 @@ public class SignInScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_sign_in_screen);
 
         // INITIALIZE BUTTONS
         Button signUpButton = findViewById(R.id.sign_up_button);
