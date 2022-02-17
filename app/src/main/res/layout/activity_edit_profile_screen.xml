@@ -35,7 +35,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/TextView"
+                android:id="@+id/ep_tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
@@ -43,6 +43,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/ep_edtxt_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Name"
@@ -61,7 +62,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/TextView2"
+                android:id="@+id/ep_tv_dob"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date_of_birth"
@@ -69,6 +70,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/ep_edtxt_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
@@ -86,20 +88,22 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/ep_tv_aadhar_no"
                 android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-                android:maxLength="12"
+                android:layout_height="wrap_content"
                 android:text="@string/aadhar_number"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/ep_edtxt_aadhar_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_aadhar_no"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLength="12" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,6 +115,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/ep_tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/postal_address"
@@ -118,12 +123,12 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/ep_edtxt_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_address"
-
                 android:inputType="textPassword" />
         </LinearLayout>
 
@@ -137,6 +142,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/ep_tv_email_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
@@ -144,12 +150,13 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/ep_edtxt_email_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Email"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/enter_email"
 
+                android:hint="@string/enter_email"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -162,6 +169,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/ep_tv_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
@@ -169,6 +177,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/ep_edtxt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Password"
@@ -187,6 +196,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/ep_tv_confirm_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/re_password"
@@ -194,6 +204,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/ep_edtxt_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Confirm Password"
@@ -212,6 +223,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/ep_tv_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/country"
@@ -219,45 +231,25 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/ep_edtxt_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Country Name"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/country"
 
+                android:hint="@string/country"
                 android:inputType="textPassword" />
         </LinearLayout>
 
         <Button
+            android:id="@+id/save_profile_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:background="@drawable/shape_sign_in_button"
-            android:text="@string/sign_up"
+            android:text="@string/save_profile"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="187dp"
-                android:layout_height="38dp"
-                android:text="@string/already_account"
-                android:textColor="@android:color/black"
-                android:textSize="15sp" />
-
-            <Button
-                android:id="@+id/login_button"
-                android:layout_width="145dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@string/login"
-                android:textSize="15sp" />
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>

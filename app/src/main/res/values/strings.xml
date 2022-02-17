@@ -28,4 +28,5 @@
     <string name="approved_by_inst_name">NIELIT India</string>
     <string name="edit_profile">Edit profile</string>
     <string name="sign_out">Sign out</string>
+    <string name="save_profile">Save profile</string>
 </resources>
