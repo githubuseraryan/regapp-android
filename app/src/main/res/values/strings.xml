@@ -29,4 +29,5 @@
     <string name="edit_profile">Edit profile</string>
     <string name="sign_out">Sign out</string>
     <string name="save_profile">Save profile</string>
+    <string name="enter_designation">Enter designation</string>
 </resources>

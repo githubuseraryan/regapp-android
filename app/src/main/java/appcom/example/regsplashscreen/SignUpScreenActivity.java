@@ -41,7 +41,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
         EditText edtDesignation = findViewById(R.id.designation_sign_up_screen);
 
         // ImageView profilePic = findViewById(R.id.profile_pic);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
         progressDialog = new ProgressDialog(SignUpScreenActivity.this);
         progressDialog.setTitle("Creating Account");
@@ -55,10 +55,20 @@ public class SignUpScreenActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 if (task.isSuccessful()) {
                     // STORE USER DETAILS IN MODEL
-                    User user = new User(mAuth.getUid(), edtUserName.getText().toString(), edtEmailId.getText().toString(), edtPassword.getText().toString(), edtAadharNo.getText().toString(), edtDOB.getText().toString(), edtAddress.getText().toString(), edtCountry.getText().toString(), edtDesignation.getText().toString());
+                    User user = User.Builder.newInstance()
+                            .setUid(mAuth.getUid())
+                            .setUserName(edtUserName.getText().toString())
+                            .setEmailId(edtEmailId.getText().toString())
+                            .setPassword(edtPassword.getText().toString())
+                            .setAadharNo(edtAadharNo.getText().toString())
+                            .setDob(edtDOB.getText().toString())
+                            .setAddress(edtAddress.getText().toString())
+                            .setCountry(edtCountry.getText().toString())
+                            .setDesignation(edtDesignation.getText().toString())
+                            .build();
                     String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                     // SET VALUE IN DATABASE
-                    database.getReference().child("users").child(userId).setValue(user);
+                    mDatabase.getReference().child("users").child(userId).setValue(user);
                     // SWITCH TO SIGN IN SCREEN ONCE USER IS REGISTERED IN THE DATABASE
                     Intent intent = new Intent(getApplicationContext(), SignInScreenActivity.class);
                     startActivity(intent);

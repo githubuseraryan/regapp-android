@@ -1,5 +1,7 @@
 package appcom.example.regsplashscreen.model;
 
+import androidx.annotation.NonNull;
+
 public class User {
 
     private String uid;
@@ -8,7 +10,6 @@ public class User {
     private String password;
     private String aadharNo;
     private String dob;
-    private String userId;
     private String address;
     private String country;
     private String designation;
@@ -16,102 +17,129 @@ public class User {
     private User() {
     }
 
-    public User(String uid,
-                String userName,
-                String emailId,
-                String password,
-                String aadharNo,
-                String dob,
-                String address,
-                String country,
-                String designation) {
-        this.userName = userName;
-        this.emailId = emailId;
-        this.password = password;
-        this.aadharNo = aadharNo;
-        this.dob = dob;
-        this.address = address;
-        this.country = country;
-        this.designation = designation;
+    public User(Builder builder) {
+        this.uid = builder.uid;
+        this.userName = builder.userName;
+        this.emailId = builder.emailId;
+        this.password = builder.password;
+        this.aadharNo = builder.aadharNo;
+        this.dob = builder.dob;
+        this.address = builder.address;
+        this.country = builder.country;
+        this.designation = builder.designation;
+    }
+
+    public static class Builder {
+        private String uid;
+        private String userName;
+        private String emailId;
+        private String password;
+        private String aadharNo;
+        private String dob;
+        private String address;
+        private String country;
+        private String designation;
+
+        public static Builder newInstance()
+        {
+            return new Builder();
+        }
+
+        private Builder() {};
+
+        public User build() {
+            return new User(this);
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "Builder{" +
+                    "uid='" + uid + '\'' +
+                    ", userName='" + userName + '\'' +
+                    ", emailId='" + emailId + '\'' +
+                    ", password='" + password + '\'' +
+                    ", aadharNo='" + aadharNo + '\'' +
+                    ", dob='" + dob + '\'' +
+                    ", address='" + address + '\'' +
+                    ", country='" + country + '\'' +
+                    ", designation='" + designation + '\'' +
+                    '}';
+        }
+
+        // SETTERS
+        public Builder setUid(String uid) {
+            this.uid = uid;
+            return this;
+        }
+        public Builder setUserName(String userName) {
+            this.userName = userName;
+            return this;
+        }
+        public Builder setEmailId(String emailId) {
+            this.emailId = emailId;
+            return this;
+        }
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+        public Builder setAadharNo(String aadharNo) {
+            this.aadharNo = aadharNo;
+            return this;
+        }
+        public Builder setDob(String dob) {
+            this.dob = dob;
+            return this;
+        }
+        public Builder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+        public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+        }
+        public Builder setDesignation(String designation) {
+            this.designation = designation;
+            return this;
+        }
     }
 
     public String getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getEmailId() {
         return emailId;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getAadharNo() {
         return aadharNo;
     }
 
-    public void setAadharNo(String aadharNo) {
-        this.aadharNo = aadharNo;
-    }
-
     public String getDob() {
         return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getCountry() {
         return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getDesignation() {
         return designation;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
 }

@@ -22,14 +22,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.Objects;
+
 import appcom.example.regsplashscreen.model.User;
 
 public class DashboardActivity extends AppCompatActivity {
-    FirebaseAuth mAuth;
-    ActivityResultLauncher<String> launcher;
-    FirebaseDatabase mDatabase;
-    FirebaseStorage mStorage;
-    DatabaseReference ref;
+    private FirebaseAuth mAuth;
+    private ActivityResultLauncher<String> launcher;
+    private FirebaseDatabase mDatabase;
+    private FirebaseStorage mStorage;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,10 @@ public class DashboardActivity extends AppCompatActivity {
         mStorage = FirebaseStorage.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        ImageButton profilePicEditor = findViewById(R.id.ds_edit_button);
+        ImageButton editProfileButton = findViewById(R.id.ds_edit_button);
         ImageView picture = findViewById(R.id.profile_pic);
 
+        // INITIALIZE TEXT VIEWS
         TextView header_username = findViewById(R.id.ds_header_username);
         TextView header_designation = findViewById(R.id.ds_header_designation);
         TextView header_country = findViewById(R.id.ds_header_country);
@@ -58,32 +61,25 @@ public class DashboardActivity extends AppCompatActivity {
         // FIREBASE AUTH DETAILS
         mAuth = FirebaseAuth.getInstance();
         String uid = mAuth.getUid();
-        ref = mDatabase.getReference().child("users");
+        databaseReference = mDatabase.getReference().child("users");
 
-        ref.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot item: dataSnapshot.getChildren()) {
-                    if (item.getKey().equals(uid))
+                    if (Objects.equals(item.getKey(), uid))
                     {
                         User user= item.getValue(User.class);
-                        String aadharNo = user.getAadharNo();
-                        String address = user.getAddress();
-                        String dob = user.getDob();
-                        String emailId = user.getEmailId();
-                        String userName = user.getUserName();
-                        String designation = user.getDesignation();
-                        String country = user.getCountry();
-                        header_username.setText(userName);
-                        header_designation.setText(designation);
-                        header_country.setText(country);
-                        details_aadhar_no.setText(aadharNo);
-                        details_address.setText(address);
-                        details_username.setText(userName);
-                        details_email_id.setText(emailId);
-                        details_dob.setText(dob);
-                        details_designation.setText(designation);
-                        details_country.setText(country);
+                        header_username.setText(Objects.requireNonNull(user).getUserName());
+                        header_designation.setText(user.getDesignation());
+                        header_country.setText(user.getCountry());
+                        details_aadhar_no.setText(user.getAadharNo());
+                        details_address.setText(user.getAddress());
+                        details_username.setText(user.getUserName());
+                        details_email_id.setText(user.getEmailId());
+                        details_dob.setText(user.getDob());
+                        details_designation.setText(user.getDesignation());
+                        details_country.setText(user.getCountry());
                     }
                 }
             }
@@ -91,7 +87,6 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(DashboardActivity.this, "Something Went Wrong", Toast.LENGTH_LONG).show();
-
             }
         });
         /*launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
@@ -118,13 +113,10 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });*/
 
-
-        /*profilePicEditor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launcher.launch("Images/*");
-            }
-        });*/
+        editProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardActivity.this, EditProfileActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -136,14 +128,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.edit_profile:
-                Toast.makeText(DashboardActivity.this, "Edit profile", Toast.LENGTH_SHORT).show();
-                break;
+                Intent ed_intent = new Intent(DashboardActivity.this, EditProfileActivity.class);
+                startActivity(ed_intent);
             case R.id.sign_out:
                 mAuth.signOut();
-                Intent i = new Intent(DashboardActivity.this, SignInScreenActivity.class);
-                startActivity(i);
+                Intent si_intent = new Intent(DashboardActivity.this, SignInScreenActivity.class);
+                startActivity(si_intent);
         }
         return true;
     }

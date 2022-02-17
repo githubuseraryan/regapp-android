@@ -76,7 +76,7 @@
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/dd_mm_yy"
-                android:inputType="textPassword" />
+                android:inputType="date" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +102,7 @@
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_aadhar_no"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:maxLength="12" />
         </LinearLayout>
 
@@ -129,7 +129,7 @@
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_address"
-                android:inputType="textPassword" />
+                android:inputType="text" />
         </LinearLayout>
 
 
@@ -155,7 +155,6 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Email"
                 android:backgroundTint="@color/colorPrimaryDark"
-
                 android:hint="@string/enter_email"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
@@ -196,21 +195,21 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ep_tv_confirm_password"
+                android:id="@+id/ep_tv_designation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/re_password"
+                android:text="@string/designation"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/ep_edtxt_confirm_password"
+                android:id="@+id/ep_edtxt_designation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Confirm Password"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/enter_password_again"
-                android:inputType="textPassword" />
+                android:hint="@string/enter_designation"
+                android:inputType="text" />
         </LinearLayout>
 
 
@@ -236,9 +235,8 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Country Name"
                 android:backgroundTint="@color/colorPrimaryDark"
-
                 android:hint="@string/country"
-                android:inputType="textPassword" />
+                android:inputType="text" />
         </LinearLayout>
 
         <Button

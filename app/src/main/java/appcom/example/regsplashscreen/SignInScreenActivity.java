@@ -15,7 +15,6 @@ import java.util.Objects;
 
 public class SignInScreenActivity extends AppCompatActivity {
 
-
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
 
