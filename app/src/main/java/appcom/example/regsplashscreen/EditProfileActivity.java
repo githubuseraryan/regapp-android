@@ -71,9 +71,9 @@ public class EditProfileActivity extends AppCompatActivity {
                         edtPassword.setText(user.getPassword());
                         edtAadharNo.setText(user.getAadharNo());
                         edtDOB.setText(user.getDob());
-                        edtAddress.setText(user.getAddress());
-                        edtCountry.setText(user.getCountry());
-                        edtDesignation.setText(user.getDesignation());
+                        edtAddress.setText(user.getPanNo());
+                        edtCountry.setText(user.getVoterIdNo());
+                        edtDesignation.setText(user.getDrivingLicenseNo());
                     }
                 }
             }
@@ -93,9 +93,9 @@ public class EditProfileActivity extends AppCompatActivity {
                     .setPassword(edtPassword.getText().toString())
                     .setAadharNo(edtAadharNo.getText().toString())
                     .setDob(edtDOB.getText().toString())
-                    .setAddress(edtAddress.getText().toString())
-                    .setCountry(edtCountry.getText().toString())
-                    .setDesignation(edtDesignation.getText().toString())
+                    .setPanNo(edtAddress.getText().toString())
+                    .setVoterIdNo(edtCountry.getText().toString())
+                    .setDrivingLicenseNo(edtDesignation.getText().toString())
                     .build();
             mDatabase.getReference().child("users").child(uid).setValue(userDetails);
             Intent intent = new Intent(EditProfileActivity.this, DashboardActivity.class);

@@ -31,14 +31,14 @@ public class SignUpScreenActivity extends AppCompatActivity {
         Button signUp = findViewById(R.id.sign_up_screen_button);
 
         // INITIALIZE INPUT TEXT BOXES
-        EditText edtEmailId = findViewById(R.id.email_id_sign_up_screen);
-        EditText edtPassword = findViewById(R.id.password_sign_up_screen);
-        EditText edtUserName = findViewById(R.id.username);
-        EditText edtDOB = findViewById(R.id.dob);
-        EditText edtAadharNo = findViewById(R.id.aadhar_no);
-        EditText edtAddress = findViewById(R.id.postal_address);
-        EditText edtCountry = findViewById(R.id.country);
-        EditText edtDesignation = findViewById(R.id.designation_sign_up_screen);
+        EditText edtEmailId = findViewById(R.id.su_email_id);
+        EditText edtPassword = findViewById(R.id.su_password);
+        EditText edtUserName = findViewById(R.id.su_username);
+        EditText edtDOB = findViewById(R.id.su_dob);
+        EditText edtAadharNo = findViewById(R.id.su_aadhar_no);
+        EditText edtPanNo = findViewById(R.id.su_pan_no);
+        EditText edtCountry = findViewById(R.id.su_voter_id_no);
+        EditText edtDrivingLicenseNo = findViewById(R.id.su_driving_license_no);
 
         // ImageView profilePic = findViewById(R.id.profile_pic);
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -62,9 +62,9 @@ public class SignUpScreenActivity extends AppCompatActivity {
                             .setPassword(edtPassword.getText().toString())
                             .setAadharNo(edtAadharNo.getText().toString())
                             .setDob(edtDOB.getText().toString())
-                            .setAddress(edtAddress.getText().toString())
-                            .setCountry(edtCountry.getText().toString())
-                            .setDesignation(edtDesignation.getText().toString())
+                            .setPanNo(edtPanNo.getText().toString())
+                            .setVoterIdNo(edtCountry.getText().toString())
+                            .setDrivingLicenseNo(edtDrivingLicenseNo.getText().toString())
                             .build();
                     String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                     // SET VALUE IN DATABASE

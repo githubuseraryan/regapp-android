@@ -118,7 +118,7 @@
                 android:id="@+id/ep_tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/postal_address"
+                android:text="@string/pan_number"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/enter_address"
+                android:hint="@string/enter_pan_no"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -198,7 +198,7 @@
                 android:id="@+id/ep_tv_designation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/designation"
+                android:text="@string/driving_license_number"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
@@ -225,7 +225,7 @@
                 android:id="@+id/ep_tv_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/country"
+                android:text="@string/voter_id_number"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
@@ -235,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Country Name"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/country"
+                android:hint="@string/voter_id_number"
                 android:inputType="text" />
         </LinearLayout>
 

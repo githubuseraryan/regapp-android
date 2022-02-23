@@ -43,7 +43,7 @@ public class DashboardActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         ImageButton editProfileButton = findViewById(R.id.ds_edit_button);
-        ImageView picture = findViewById(R.id.profile_pic);
+        ImageView picture = findViewById(R.id.su_profile_pic);
 
         // INITIALIZE TEXT VIEWS
         TextView header_username = findViewById(R.id.ds_header_username);
@@ -71,15 +71,15 @@ public class DashboardActivity extends AppCompatActivity {
                     {
                         User user= item.getValue(User.class);
                         header_username.setText(Objects.requireNonNull(user).getUserName());
-                        header_designation.setText(user.getDesignation());
-                        header_country.setText(user.getCountry());
+                        header_designation.setText(user.getDrivingLicenseNo());
+                        header_country.setText(user.getVoterIdNo());
                         details_aadhar_no.setText(user.getAadharNo());
-                        details_address.setText(user.getAddress());
+                        details_address.setText(user.getPanNo());
                         details_username.setText(user.getUserName());
                         details_email_id.setText(user.getEmailId());
                         details_dob.setText(user.getDob());
-                        details_designation.setText(user.getDesignation());
-                        details_country.setText(user.getCountry());
+                        details_designation.setText(user.getDrivingLicenseNo());
+                        details_country.setText(user.getVoterIdNo());
                     }
                 }
             }

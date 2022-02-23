@@ -83,7 +83,7 @@
                 android:layout_below="@+id/ds_header_designation"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="@string/country"
+                android:text="@string/voter_id_number"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="16sp" />
@@ -95,7 +95,7 @@
                 android:layout_below="@+id/ds_header_username"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="@string/designation"
+                android:text="@string/driving_license_number"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="18sp" />
@@ -157,7 +157,7 @@
                 android:layout_marginTop="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="@string/designation"
+                android:text="@string/driving_license_number"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ds_tv_dob_key" />
@@ -170,7 +170,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
                 android:clickable="true"
-                android:text="@string/postal_address"
+                android:text="@string/pan_number"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ds_tv_designation_key"
@@ -211,7 +211,7 @@
                 android:layout_marginTop="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="@string/country"
+                android:text="@string/voter_id_number"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ds_tv_address_key" />

@@ -10,9 +10,9 @@ public class User {
     private String password;
     private String aadharNo;
     private String dob;
-    private String address;
-    private String country;
-    private String designation;
+    private String panNo;
+    private String voterIdNo;
+    private String drivingLicenseNo;
 
     private User() {
     }
@@ -24,9 +24,9 @@ public class User {
         this.password = builder.password;
         this.aadharNo = builder.aadharNo;
         this.dob = builder.dob;
-        this.address = builder.address;
-        this.country = builder.country;
-        this.designation = builder.designation;
+        this.panNo = builder.panNo;
+        this.voterIdNo = builder.voterIdNo;
+        this.drivingLicenseNo = builder.drivingLicenseNo;
     }
 
     public static class Builder {
@@ -36,9 +36,9 @@ public class User {
         private String password;
         private String aadharNo;
         private String dob;
-        private String address;
-        private String country;
-        private String designation;
+        private String panNo;
+        private String voterIdNo;
+        private String drivingLicenseNo;
 
         public static Builder newInstance()
         {
@@ -61,9 +61,9 @@ public class User {
                     ", password='" + password + '\'' +
                     ", aadharNo='" + aadharNo + '\'' +
                     ", dob='" + dob + '\'' +
-                    ", address='" + address + '\'' +
-                    ", country='" + country + '\'' +
-                    ", designation='" + designation + '\'' +
+                    ", panNo='" + panNo + '\'' +
+                    ", voterIdNo='" + voterIdNo + '\'' +
+                    ", drivingLicenseNo='" + drivingLicenseNo + '\'' +
                     '}';
         }
 
@@ -92,16 +92,16 @@ public class User {
             this.dob = dob;
             return this;
         }
-        public Builder setAddress(String address) {
-            this.address = address;
+        public Builder setPanNo(String panNo) {
+            this.panNo = panNo;
             return this;
         }
-        public Builder setCountry(String country) {
-            this.country = country;
+        public Builder setVoterIdNo(String voterIdNo) {
+            this.voterIdNo = voterIdNo;
             return this;
         }
-        public Builder setDesignation(String designation) {
-            this.designation = designation;
+        public Builder setDrivingLicenseNo(String drivingLicenseNo) {
+            this.drivingLicenseNo = drivingLicenseNo;
             return this;
         }
     }
@@ -130,16 +130,16 @@ public class User {
         return dob;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPanNo() {
+        return panNo;
     }
 
-    public String getCountry() {
-        return country;
+    public String getVoterIdNo() {
+        return voterIdNo;
     }
 
-    public String getDesignation() {
-        return designation;
+    public String getDrivingLicenseNo() {
+        return drivingLicenseNo;
     }
 
 }

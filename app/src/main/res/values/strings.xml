@@ -2,8 +2,8 @@
     <string name="app_name">My Login</string>
     <string name="name">Name</string>
     <string name="enter_name">Enter Your Name</string>
-    <string name="email">Email</string>
-    <string name="enter_email">Enter Your Email</string>
+    <string name="email">Email Id</string>
+    <string name="enter_email">Enter Your Email Id</string>
     <string name="password">Password</string>
     <string name="enter_password">Enter Password</string>
     <string name="re_password">Confirm Password</string>
@@ -15,14 +15,14 @@
     <string name="forgot_text">Forgot Password?</string>
     <string name="sign_in_google">Sign in with google</string>
     <string name="no_account">"Don't have an account ?</string>
-    <string name="country">Country</string>
+    <string name="voter_id_number">Voter ID Number</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="dd_mm_yy">DD-MM-YY</string>
     <string name="aadhar_number">Aadhar Number</string>
-    <string name="enter_aadhar_no">Enter Aadhar No</string>
-    <string name="postal_address">Postal Address</string>
-    <string name="enter_address">Enter Address</string>
-    <string name="designation">Designation</string>
+    <string name="enter_aadhar_no">Enter Aadhar number</string>
+    <string name="pan_number">PAN Number</string>
+    <string name="enter_pan_no">Enter PAN number</string>
+    <string name="driving_license_number">Driving License Number</string>
     <string name="profile_pic">Profile Picture</string>
     <string name="username">User name</string>
     <string name="approved_by_inst_name">NIELIT India</string>
@@ -30,4 +30,6 @@
     <string name="sign_out">Sign out</string>
     <string name="save_profile">Save profile</string>
     <string name="enter_designation">Enter designation</string>
+    <string name="enter_driving_license_number">Enter Driving License number</string>
+    <string name="enter_voter_id_number">Enter Voter ID number</string>
 </resources>

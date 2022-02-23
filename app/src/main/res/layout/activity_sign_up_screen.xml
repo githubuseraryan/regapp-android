@@ -17,7 +17,7 @@
             android:background="@color/colorPrimaryDark">
 
             <ImageView
-                android:id = "@+id/profile_pic"
+                android:id="@+id/su_profile_pic"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -43,7 +43,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/su_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Name"
@@ -69,7 +69,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/dob"
+                android:id="@+id/su_dob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
@@ -90,17 +90,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLength="15"
                 android:text="@string/aadhar_number"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/aadhar_no"
+                android:id="@+id/su_aadhar_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
+                android:maxLength="12"
                 android:hint="@string/enter_aadhar_no"
                 android:inputType="numberSigned" />
 
@@ -117,21 +117,75 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/postal_address"
+                android:text="@string/pan_number"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/postal_address"
+                android:id="@+id/su_pan_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="Date of Birth"
+                android:autofillHints="Enter PAN No"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/enter_address"
+                android:hint="@string/enter_pan_no"
+                android:maxLength="10"
                 android:inputType="textImeMultiLine" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/driving_license_number"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/su_driving_license_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Designation"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:hint="@string/enter_driving_license_number"
+                android:inputType="text" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/voter_id_number"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id ="@+id/su_voter_id_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Country Name"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:hint="@string/enter_voter_id_number"
+                android:inputType="text" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,7 +203,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/email_id_sign_up_screen"
+                android:id="@+id/su_email_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Email"
@@ -175,67 +229,13 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/password_sign_up_screen"
+                android:id="@+id/su_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Password"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/designation"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/designation_sign_up_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="Designation"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/designation"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/country"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id ="@+id/country"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="Country Name"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/country"
-                android:inputType="text" />
 
         </LinearLayout>
 
@@ -271,7 +271,8 @@
                 android:text="@string/login"
                 android:textSize="15sp" />
 
-
         </LinearLayout>
+
+
     </LinearLayout>
 </ScrollView>
