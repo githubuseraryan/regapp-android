@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/dd_mm_yy"
+                android:hint="@string/ddmmyyyy"
                 android:inputType="number"  />
 
         </LinearLayout>

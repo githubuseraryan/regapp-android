@@ -17,7 +17,7 @@
     <string name="no_account">"Don't have an account ?</string>
     <string name="voter_id_number">Voter ID Number</string>
     <string name="date_of_birth">Date of Birth</string>
-    <string name="dd_mm_yy">DD-MM-YY</string>
+    <string name="ddmmyyyy">DDMMYYYY</string>
     <string name="aadhar_number">Aadhar Number</string>
     <string name="enter_aadhar_no">Enter Aadhar number</string>
     <string name="pan_number">PAN Number</string>
@@ -32,4 +32,5 @@
     <string name="enter_designation">Enter designation</string>
     <string name="enter_driving_license_number">Enter Driving License number</string>
     <string name="enter_voter_id_number">Enter Voter ID number</string>
+    <string name="reset_password">RESET PASSWORD</string>
 </resources>

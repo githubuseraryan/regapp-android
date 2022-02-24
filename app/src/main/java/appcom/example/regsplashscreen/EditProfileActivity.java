@@ -27,6 +27,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +53,11 @@ public class EditProfileActivity extends AppCompatActivity {
         // INITIALIZE EDIT TEXT BOXES
         EditText edtUserName = findViewById(R.id.ep_edtxt_username);
         EditText edtEmailId = findViewById(R.id.ep_edtxt_email_id);
-        EditText edtPassword = findViewById(R.id.ep_edtxt_password);
         EditText edtAadharNo = findViewById(R.id.ep_edtxt_aadhar_no);
         EditText edtDOB = findViewById(R.id.ep_edtxt_dob);
-        EditText edtAddress = findViewById(R.id.ep_edtxt_address);
-        EditText edtCountry = findViewById(R.id.ep_edtxt_country);
-        EditText edtDesignation = findViewById(R.id.ep_edtxt_designation);
+        EditText edtPanNo = findViewById(R.id.ep_edtxt_pan_no);
+        EditText edtVoterIdNo = findViewById(R.id.ep_edtxt_voter_id_no);
+        EditText edtDrivingLicenseNo = findViewById(R.id.ep_edtxt_driving_license_no);
 
         // SET TEXT IN EDIT BOXES
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -68,12 +68,12 @@ public class EditProfileActivity extends AppCompatActivity {
                         User user = item.getValue(User.class);
                         edtUserName.setText(Objects.requireNonNull(user).getUserName());
                         edtEmailId.setText(user.getEmailId());
-                        edtPassword.setText(user.getPassword());
                         edtAadharNo.setText(user.getAadharNo());
                         edtDOB.setText(user.getDob());
-                        edtAddress.setText(user.getPanNo());
-                        edtCountry.setText(user.getVoterIdNo());
-                        edtDesignation.setText(user.getDrivingLicenseNo());
+                        edtPanNo.setText(user.getPanNo());
+                        edtVoterIdNo.setText(user.getVoterIdNo());
+                        edtDrivingLicenseNo.setText(user.getDrivingLicenseNo());
+                        password = user.getPassword();
                     }
                 }
             }
@@ -90,12 +90,12 @@ public class EditProfileActivity extends AppCompatActivity {
                     .setUid(mAuth.getUid())
                     .setUserName(edtUserName.getText().toString())
                     .setEmailId(edtEmailId.getText().toString())
-                    .setPassword(edtPassword.getText().toString())
+                    .setPassword(password)
                     .setAadharNo(edtAadharNo.getText().toString())
                     .setDob(edtDOB.getText().toString())
-                    .setPanNo(edtAddress.getText().toString())
-                    .setVoterIdNo(edtCountry.getText().toString())
-                    .setDrivingLicenseNo(edtDesignation.getText().toString())
+                    .setPanNo(edtPanNo.getText().toString())
+                    .setVoterIdNo(edtVoterIdNo.getText().toString())
+                    .setDrivingLicenseNo(edtDrivingLicenseNo.getText().toString())
                     .build();
             mDatabase.getReference().child("users").child(uid).setValue(userDetails);
             Intent intent = new Intent(EditProfileActivity.this, DashboardActivity.class);

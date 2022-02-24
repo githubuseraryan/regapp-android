@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/dd_mm_yy"
+                android:hint="@string/ddmmyyyy"
                 android:inputType="date" />
         </LinearLayout>
 
@@ -115,7 +115,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ep_tv_address"
+                android:id="@+id/ep_tv_pan_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/pan_number"
@@ -123,12 +123,13 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/ep_edtxt_address"
+                android:id="@+id/ep_edtxt_pan_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Date of Birth"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:hint="@string/enter_pan_no"
+                android:maxLength="10"
                 android:inputType="text" />
         </LinearLayout>
 
@@ -168,34 +169,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ep_tv_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/password"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/ep_edtxt_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="Password"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/enter_password"
-                android:inputType="textPassword"
-                android:minHeight="48dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/ep_tv_designation"
+                android:id="@+id/ep_tv_driving_license_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/driving_license_number"
@@ -203,15 +177,14 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/ep_edtxt_designation"
+                android:id="@+id/ep_edtxt_driving_license_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Confirm Password"
                 android:backgroundTint="@color/colorPrimaryDark"
-                android:hint="@string/enter_designation"
+                android:hint="@string/enter_driving_license_number"
                 android:inputType="text" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -222,7 +195,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ep_tv_country"
+                android:id="@+id/ep_tv_voter_id_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/voter_id_number"
@@ -230,7 +203,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/ep_edtxt_country"
+                android:id="@+id/ep_edtxt_voter_id_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="Country Name"
@@ -248,6 +221,16 @@
             android:text="@string/save_profile"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/forgot_password_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/reset_password"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>

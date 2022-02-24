@@ -26,8 +26,8 @@ public class SignInScreenActivity extends AppCompatActivity {
         // INITIALIZE BUTTONS
         Button signUpButton = findViewById(R.id.sign_up_button);
         Button signInButton = findViewById(R.id.sign_in_button);
-        EditText edtxtEmailId = findViewById(R.id.etEmailId);
-        EditText edtxtPwd = findViewById(R.id.etPassword);
+        EditText edtxtEmailId = findViewById(R.id.si_et_email_id);
+        EditText edtxtPwd = findViewById(R.id.si_et_password);
 
         // SET PROGRESS DIALOG BOX
         progressDialog = new ProgressDialog(SignInScreenActivity.this);
