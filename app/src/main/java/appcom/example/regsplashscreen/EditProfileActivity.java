@@ -27,7 +27,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
-    private String password;
+    private String emailId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // INITIALIZE BUTTONS
         Button saveProfileButton = findViewById(R.id.save_profile_button);
+        Button forgotPasswordButton = findViewById(R.id.forgot_password_button);
 
         // SET PROGRESS DIALOG BOX
         progressDialog = new ProgressDialog(EditProfileActivity.this);
@@ -63,7 +64,7 @@ public class EditProfileActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot item: dataSnapshot.getChildren()) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     if (Objects.equals(item.getKey(), uid)) {
                         User user = item.getValue(User.class);
                         edtUserName.setText(Objects.requireNonNull(user).getUserName());
@@ -73,7 +74,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         edtPanNo.setText(user.getPanNo());
                         edtVoterIdNo.setText(user.getVoterIdNo());
                         edtDrivingLicenseNo.setText(user.getDrivingLicenseNo());
-                        password = user.getPassword();
+                        emailId = user.getEmailId();
                     }
                 }
             }
@@ -90,7 +91,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     .setUid(mAuth.getUid())
                     .setUserName(edtUserName.getText().toString())
                     .setEmailId(edtEmailId.getText().toString())
-                    .setPassword(password)
                     .setAadharNo(edtAadharNo.getText().toString())
                     .setDob(edtDOB.getText().toString())
                     .setPanNo(edtPanNo.getText().toString())
@@ -101,6 +101,14 @@ public class EditProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(EditProfileActivity.this, DashboardActivity.class);
             startActivity(intent);
             progressDialog.dismiss();
+        });
+
+        forgotPasswordButton.setOnClickListener(v -> {
+            mAuth.sendPasswordResetEmail(emailId).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(EditProfileActivity.this, "Email sent.", Toast.LENGTH_LONG).show();
+                }
+            });
         });
     }
 }

@@ -133,12 +133,15 @@ public class DashboardActivity extends AppCompatActivity {
             case R.id.edit_profile:
                 Intent ed_intent = new Intent(DashboardActivity.this, EditProfileActivity.class);
                 startActivity(ed_intent);
+                return true;
             case R.id.sign_out:
                 mAuth.signOut();
                 Intent si_intent = new Intent(DashboardActivity.this, SignInScreenActivity.class);
                 startActivity(si_intent);
-        }
-        return true;
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+            }
     }
 
 }

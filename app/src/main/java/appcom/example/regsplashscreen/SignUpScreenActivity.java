@@ -59,7 +59,6 @@ public class SignUpScreenActivity extends AppCompatActivity {
                             .setUid(mAuth.getUid())
                             .setUserName(edtUserName.getText().toString())
                             .setEmailId(edtEmailId.getText().toString())
-                            .setPassword(edtPassword.getText().toString())
                             .setAadharNo(edtAadharNo.getText().toString())
                             .setDob(edtDOB.getText().toString())
                             .setPanNo(edtPanNo.getText().toString())

@@ -7,7 +7,6 @@ public class User {
     private String uid;
     private String userName;
     private String emailId;
-    private String password;
     private String aadharNo;
     private String dob;
     private String panNo;
@@ -21,7 +20,6 @@ public class User {
         this.uid = builder.uid;
         this.userName = builder.userName;
         this.emailId = builder.emailId;
-        this.password = builder.password;
         this.aadharNo = builder.aadharNo;
         this.dob = builder.dob;
         this.panNo = builder.panNo;
@@ -33,7 +31,6 @@ public class User {
         private String uid;
         private String userName;
         private String emailId;
-        private String password;
         private String aadharNo;
         private String dob;
         private String panNo;
@@ -45,7 +42,7 @@ public class User {
             return new Builder();
         }
 
-        private Builder() {};
+        private Builder() {}
 
         public User build() {
             return new User(this);
@@ -58,7 +55,6 @@ public class User {
                     "uid='" + uid + '\'' +
                     ", userName='" + userName + '\'' +
                     ", emailId='" + emailId + '\'' +
-                    ", password='" + password + '\'' +
                     ", aadharNo='" + aadharNo + '\'' +
                     ", dob='" + dob + '\'' +
                     ", panNo='" + panNo + '\'' +
@@ -80,10 +76,7 @@ public class User {
             this.emailId = emailId;
             return this;
         }
-        public Builder setPassword(String password) {
-            this.password = password;
-            return this;
-        }
+
         public Builder setAadharNo(String aadharNo) {
             this.aadharNo = aadharNo;
             return this;
@@ -116,10 +109,6 @@ public class User {
 
     public String getEmailId() {
         return emailId;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getAadharNo() {
