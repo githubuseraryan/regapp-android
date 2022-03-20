@@ -25,6 +25,18 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/user" />
 
+            <ImageButton
+                android:id="@+id/su_edit_profile_pic_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="100dp"
+                android:background="#000000"
+                android:clickable="true"
+                android:contentDescription="@string/profile_pic"
+                android:focusable="true"
+                android:src="@android:drawable/ic_menu_edit" />
+
         </RelativeLayout>
 
         <LinearLayout

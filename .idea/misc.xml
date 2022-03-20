@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/regapp-android/app/src/main/res/drawable/shape_user.xml" value="0.214" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_dashboard.xml" value="0.16" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_dashboard_screen.xml" value="0.5" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_edit_profile_screen.xml" value="0.22916666666666666" />
