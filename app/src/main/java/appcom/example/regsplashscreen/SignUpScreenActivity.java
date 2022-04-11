@@ -7,12 +7,17 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,15 +25,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.util.HashMap;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 import appcom.example.regsplashscreen.model.User;
@@ -42,13 +44,12 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
-    StorageReference storageReference;
-    DatabaseReference databaseReference;
     String[] cameraPermission;
     String[] storagePermission;
     Uri imageUri;
-    String storagepath = "Users_Profile_Cover_image/";
-    String profileOrCoverPhoto;
+    String base64EncodedImage = null;
+    ImageView profilePic;
+    Bundle savedState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +71,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
         EditText edtCountry = findViewById(R.id.su_voter_id_no);
         EditText edtDrivingLicenseNo = findViewById(R.id.su_driving_license_no);
 
-        // ImageView profilePic = findViewById(R.id.su_profile_pic);
+        profilePic = findViewById(R.id.su_profile_pic);
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = mDatabase.getReference("users");
         mAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(SignUpScreenActivity.this);
@@ -82,7 +81,6 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
 
 
         signUpButton.setOnClickListener(v -> {
@@ -100,6 +98,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
                             .setPanNo(edtPanNo.getText().toString())
                             .setVoterIdNo(edtCountry.getText().toString())
                             .setDrivingLicenseNo(edtDrivingLicenseNo.getText().toString())
+                            .setEncodedImage(base64EncodedImage)
                             .build();
                     String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                     // SET VALUE IN DATABASE
@@ -115,8 +114,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
         // EDIT PROFILE PIC BUTTON
         editProfilePicButton.setOnClickListener(v -> {
-            profileOrCoverPhoto = "image";
-            showImagePicDialog();
+            showImagePicDialog(savedInstanceState);
         });
 
 
@@ -134,8 +132,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
                 imageUri = data.getData();
                 uploadProfileCoverPhoto(imageUri);
             }
-            if (requestCode == IMAGE_PICKCAMERA_REQUEST) {
-                uploadProfileCoverPhoto(imageUri);
+            if (requestCode == IMAGE_PICKCAMERA_REQUEST && savedState != null) {
+                uploadProfileCoverPhoto((Uri) savedState.getParcelable("imageUri"));
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -172,37 +170,31 @@ public class SignUpScreenActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadProfileCoverPhoto(final Uri imageUri) {
-        String filepathname = storagepath + "" + profileOrCoverPhoto + "_" + mAuth.getUid();
-        StorageReference storageReference1 = storageReference.child(filepathname);
-        storageReference1.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
-            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-            while (!uriTask.isSuccessful()) ;
-
-            // We will get the url of our image using uritask
-            final Uri downloadUri = uriTask.getResult();
-            if (uriTask.isSuccessful()) {
-
-                // updating our image url into the realtime database
-                HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put(profileOrCoverPhoto, downloadUri.toString());
-                databaseReference.child(mAuth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(SignUpScreenActivity.this, "Updated", Toast.LENGTH_LONG).show();
-                    }
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(SignUpScreenActivity.this, "Error Updating ", Toast.LENGTH_LONG).show();
-                });
-            } else {
-                Toast.makeText(SignUpScreenActivity.this, "Error", Toast.LENGTH_LONG).show();
+    private void uploadProfileCoverPhoto(Uri imageUri) {
+        InputStream imageStream = null;
+        if (imageUri != null) {
+            try {
+                imageStream = this.getContentResolver().openInputStream(imageUri);
+                Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
+                profilePic.setImageBitmap(bitmapImage);
+                base64EncodedImage = encodeImageToBase64(bitmapImage);
+            } catch (IOException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
-        }).addOnFailureListener(e -> {
-            Toast.makeText(SignUpScreenActivity.this, "Error", Toast.LENGTH_LONG).show();
-        });
+        }
     }
 
-    private void showImagePicDialog() {
+    private String encodeImageToBase64(Bitmap image) {
+        Bitmap bitmapImage = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageByteArray = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
+        Log.d("BASE64 ENCODED STRING", imageEncoded);
+        return imageEncoded;
+    }
+
+    private void showImagePicDialog(Bundle savedInstanceState) {
         String[] options = {"Camera", "Gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pick Image From");
@@ -226,9 +218,10 @@ public class SignUpScreenActivity extends AppCompatActivity {
     }
 
     private void pickFromGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+        Intent galleryIntent = new Intent();
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, IMAGEPICK_GALLERY_REQUEST);
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(galleryIntent, "Select file"), IMAGEPICK_GALLERY_REQUEST);
     }
 
     private void requestStoragePermission() {
@@ -257,5 +250,12 @@ public class SignUpScreenActivity extends AppCompatActivity {
         boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
         boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
         return result && result1;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle instanceData) {
+        super.onSaveInstanceState(instanceData);
+        instanceData.putParcelable("imageUri", imageUri);
+        savedState = instanceData;
     }
 }
