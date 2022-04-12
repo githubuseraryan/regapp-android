@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -20,17 +19,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.Objects;
 
 import appcom.example.regsplashscreen.model.User;
+import appcom.example.regsplashscreen.util.LocalBase64Util;
 
 public class DashboardActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ActivityResultLauncher<String> launcher;
     private FirebaseDatabase mDatabase;
-    private FirebaseStorage mStorage;
     private DatabaseReference databaseReference;
 
     @Override
@@ -38,12 +36,15 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_screen);
 
+        // FIREBASE AUTH DETAILS
         mDatabase = FirebaseDatabase.getInstance();
-        mStorage = FirebaseStorage.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        String uid = mAuth.getUid();
+        databaseReference = mDatabase.getReference().child("users");
 
+        // INITIALIZE PROFILE PICTURE IMAGE
         ImageButton editProfileButton = findViewById(R.id.ds_edit_button);
-        ImageView picture = findViewById(R.id.su_profile_pic);
+        ImageView profilePicture = findViewById(R.id.ds_profile_picture);
 
         // INITIALIZE TEXT VIEWS
         TextView header_username = findViewById(R.id.ds_header_username);
@@ -58,10 +59,7 @@ public class DashboardActivity extends AppCompatActivity {
         TextView details_aadhar_no = findViewById(R.id.ds_tv_aadhar_no_val);
         TextView details_username = findViewById(R.id.ds_tv_username_val);
 
-        // FIREBASE AUTH DETAILS
-        mAuth = FirebaseAuth.getInstance();
-        String uid = mAuth.getUid();
-        databaseReference = mDatabase.getReference().child("users");
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,38 +78,16 @@ public class DashboardActivity extends AppCompatActivity {
                         details_dob.setText(user.getDob());
                         details_designation.setText(user.getDrivingLicenseNo());
                         details_country.setText(user.getVoterIdNo());
+                        profilePicture.setImageBitmap(LocalBase64Util.decodeBase64StringToImage(user.getEncodedImage()));
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(DashboardActivity.this, "Something Went Wrong", Toast.LENGTH_LONG).show();
+                // Toast.makeText(DashboardActivity.this, "Something Went Wrong", Toast.LENGTH_LONG).show();
             }
         });
-        /*launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
-            @Override
-            public void onActivityResult(Uri uri) {
-                picture.setImageURI(uri);
-                StorageReference reference = mStorage.getReference().child("image");
-                reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                mDatabase.getReference().child("ProfilePic").setValue(uri.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(getApplicationContext(), "Image Uploaded", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        });*/
 
         editProfileButton.setOnClickListener(v -> {
             Intent intent = new Intent(DashboardActivity.this, EditProfileActivity.class);

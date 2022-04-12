@@ -12,8 +12,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,12 +26,12 @@ import androidx.core.content.ContextCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
 import appcom.example.regsplashscreen.model.User;
+import appcom.example.regsplashscreen.util.LocalBase64Util;
 
 public class SignUpScreenActivity extends AppCompatActivity {
 
@@ -82,7 +80,6 @@ public class SignUpScreenActivity extends AppCompatActivity {
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-
         signUpButton.setOnClickListener(v -> {
             progressDialog.show();
             mAuth.createUserWithEmailAndPassword(edtEmailId.getText().toString(), edtPassword.getText().toString()).addOnCompleteListener(task -> {
@@ -99,6 +96,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
                             .setVoterIdNo(edtCountry.getText().toString())
                             .setDrivingLicenseNo(edtDrivingLicenseNo.getText().toString())
                             .setEncodedImage(base64EncodedImage)
+                            .setUserActive("Y")
                             .build();
                     String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                     // SET VALUE IN DATABASE
@@ -114,9 +112,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
         // EDIT PROFILE PIC BUTTON
         editProfilePicButton.setOnClickListener(v -> {
-            showImagePicDialog(savedInstanceState);
+            showCameraGallerySelectorDialogBox();
         });
-
 
         // SWITCH TO SIGN IN SCREEN
         loginButton.setOnClickListener(v -> {
@@ -125,76 +122,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
-                imageUri = data.getData();
-                uploadProfileCoverPhoto(imageUri);
-            }
-            if (requestCode == IMAGE_PICKCAMERA_REQUEST && savedState != null) {
-                uploadProfileCoverPhoto((Uri) savedState.getParcelable("imageUri"));
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case CAMERA_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean camera_accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (camera_accepted && writeStorageAccepted) {
-                        pickFromCamera();
-                    } else {
-                        Toast.makeText(this, "Please Enable Camera and Storage Permissions", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            break;
-            case STORAGE_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (writeStorageAccepted) {
-                        pickFromGallery();
-                    } else {
-                        Toast.makeText(this, "Please Enable Storage Permissions", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            break;
-        }
-    }
-
-    private void uploadProfileCoverPhoto(Uri imageUri) {
-        InputStream imageStream = null;
-        if (imageUri != null) {
-            try {
-                imageStream = this.getContentResolver().openInputStream(imageUri);
-                Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
-                profilePic.setImageBitmap(bitmapImage);
-                base64EncodedImage = encodeImageToBase64(bitmapImage);
-            } catch (IOException e) {
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    private String encodeImageToBase64(Bitmap image) {
-        Bitmap bitmapImage = image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageByteArray = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
-        Log.d("BASE64 ENCODED STRING", imageEncoded);
-        return imageEncoded;
-    }
-
-    private void showImagePicDialog(Bundle savedInstanceState) {
+    // CAMERA/GALLERY SELECTOR DIALOG BOX
+    private void showCameraGallerySelectorDialogBox() {
         String[] options = {"Camera", "Gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pick Image From");
@@ -217,21 +146,58 @@ public class SignUpScreenActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    private void pickFromGallery() {
-        Intent galleryIntent = new Intent();
-        galleryIntent.setType("image/*");
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(galleryIntent, "Select file"), IMAGEPICK_GALLERY_REQUEST);
+    // CHECK IF PERMISSION TO ACCESS CAMERA EXISTS
+    private boolean checkCameraPermission() {
+        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
+        boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+        return result && result1;
     }
 
-    private void requestStoragePermission() {
-        requestPermissions(storagePermission, STORAGE_REQUEST);
+    // REQUEST PERMISSION TO ACCESS CAMERA
+    private void requestCameraPermission() {
+        requestPermissions(cameraPermission, CAMERA_REQUEST);
     }
 
+    // CHECK IF PERMISSION TO ACCESS INTERNAL STORAGE EXISTS
     private boolean checkStoragePermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
     }
 
+    // REQUEST PERMISSION TO ACCESS INTERNAL STORAGE
+    private void requestStoragePermission() { requestPermissions(storagePermission, STORAGE_REQUEST); }
+
+    // TO CHECK IF PERMISSIONS REQUESTED IS GRANTED OR NOT
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case CAMERA_REQUEST: {
+                if (grantResults.length > 0) {
+                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    if (cameraAccepted && writeStorageAccepted) {
+                        pickFromCamera();
+                    } else {
+                        Toast.makeText(this, "Please Enable Camera and Storage Permissions", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+            break;
+            case STORAGE_REQUEST: {
+                if (grantResults.length > 0) {
+                    boolean writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    if (writeStorageAccepted) {
+                        pickFromGallery();
+                    } else {
+                        Toast.makeText(this, "Please Enable Storage Permissions", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+            break;
+        }
+    }
+
+    // TAKE A PHOTO FROM PHONE CAMERA
     private void pickFromCamera() {
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.Images.Media.TITLE, "Temp_pic");
@@ -242,16 +208,45 @@ public class SignUpScreenActivity extends AppCompatActivity {
         startActivityForResult(cameraIntent, IMAGE_PICKCAMERA_REQUEST);
     }
 
-    private void requestCameraPermission() {
-        requestPermissions(cameraPermission, CAMERA_REQUEST);
+    // TAKE A PHOTO FROM GALLERY
+    private void pickFromGallery() {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setType("image/*");
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(galleryIntent, "Select file"), IMAGEPICK_GALLERY_REQUEST);
     }
 
-    private boolean checkCameraPermission() {
-        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result && result1;
+    // ON SELECTION OF A PHOTO
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
+                imageUri = data.getData();
+                uploadProfileCoverPhoto(imageUri);
+            }
+            if (requestCode == IMAGE_PICKCAMERA_REQUEST && savedState != null) {
+                uploadProfileCoverPhoto((Uri) savedState.getParcelable("imageUri"));
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
+    // UPLOAD IMAGE
+    private void uploadProfileCoverPhoto(Uri imageUri) {
+        InputStream imageStream = null;
+        if (imageUri != null) {
+            try {
+                imageStream = this.getContentResolver().openInputStream(imageUri);
+                Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
+                profilePic.setImageBitmap(bitmapImage);
+                base64EncodedImage = LocalBase64Util.encodeImageToBase64String(bitmapImage);
+            } catch (IOException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    // SAVING STATE FOR WHEN APP SWITCHES TO CAMERA SO THAT IMAGE UR CAN BE FETCHED
     @Override
     public void onSaveInstanceState(Bundle instanceData) {
         super.onSaveInstanceState(instanceData);
