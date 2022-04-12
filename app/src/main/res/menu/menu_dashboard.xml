@@ -7,6 +7,11 @@
     <item
         android:id="@+id/sign_out"
         android:title="@string/sign_out" />
+    <item
+        android:id="@+id/admin_screen"
+        android:title="@string/admin_screen"
+        android:visible="false"
+        android:enabled="false" />
 
 
 

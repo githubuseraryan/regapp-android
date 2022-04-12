@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -18,6 +20,9 @@ public class SignInScreenActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
     private String emailId;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference databaseReference;
+    private String userStateActive = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,12 @@ public class SignInScreenActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(SignInScreenActivity.this);
         progressDialog.setTitle("Logging In");
         progressDialog.setMessage("Logging In");
+
+        // FIREBASE DETAILS
+        mDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        databaseReference = mDatabase.getReference().child("users");
+        String uid = mAuth.getUid();
 
         // SIGN UP BUTTON LISTENER
         signUpButton.setOnClickListener(v -> {
@@ -52,8 +62,8 @@ public class SignInScreenActivity extends AppCompatActivity {
                     mAuth.signInWithEmailAndPassword(edtxtEmailId.getText().toString(), edtxtPwd.getText().toString()).addOnCompleteListener(task -> {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(SignInScreenActivity.this, DashboardActivity.class);
-                            startActivity(intent);
+                                Intent intent = new Intent(SignInScreenActivity.this, DashboardActivity.class);
+                                startActivity(intent);
                         } else
                             Toast.makeText(SignInScreenActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     });
@@ -68,7 +78,7 @@ public class SignInScreenActivity extends AppCompatActivity {
         // FORGOT PASSWORD BUTTON LISTENER
         forgotPasswordButton.setOnClickListener(v -> {
             try {
-                if(!edtxtEmailId.getText().toString().trim().isEmpty()) {
+                if (!edtxtEmailId.getText().toString().trim().isEmpty()) {
                     emailId = edtxtEmailId.getText().toString();
                 } else {
                     throw new RuntimeException("Email-id cannot be empty");

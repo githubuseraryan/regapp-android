@@ -14,6 +14,7 @@ public class User {
     private String drivingLicenseNo;
     private String encodedImage;
     private String userActive;
+    private String userAdmin;
 
     private User() {
     }
@@ -29,6 +30,7 @@ public class User {
         this.drivingLicenseNo = builder.drivingLicenseNo;
         this.encodedImage = builder.encodedImage;
         this.userActive = builder.userActive;
+        this.userAdmin = builder.userAdmin;
     }
 
     public static class Builder {
@@ -42,6 +44,7 @@ public class User {
         private String drivingLicenseNo;
         private String encodedImage;
         private String userActive;
+        private String userAdmin;
 
         public static Builder newInstance()
         {
@@ -68,6 +71,7 @@ public class User {
                     ", drivingLicenseNo='" + drivingLicenseNo + '\'' +
                     ", encodedImage='" + encodedImage + '\'' +
                     ", userActive='" + userActive + '\'' +
+                    ", userAdmin='" + userAdmin + '\'' +
                     '}';
         }
 
@@ -113,6 +117,10 @@ public class User {
             this.userActive = userActive;
             return this;
         }
+        public Builder setUserAdmin(String userAdmin) {
+            this.userAdmin = userAdmin;
+            return this;
+        }
     }
 
     public String getUid() {
@@ -150,5 +158,7 @@ public class User {
     public String getEncodedImage() { return encodedImage; }
 
     public String getUserActive() { return userActive; }
+
+    public String getUserAdmin() { return userAdmin; }
 
 }

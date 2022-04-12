@@ -137,6 +137,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     .setEncodedImage(LocalBase64Util.encodeImageToBase64String(profilePic.getDrawable() != null ?
                             ((BitmapDrawable) profilePic.getDrawable()).getBitmap() : null))
                     .setUserActive("Y")
+                    .setUserAdmin("N")
                     .build();
             mDatabase.getReference().child("users").child(uid).setValue(userDetails);
             Intent intent = new Intent(EditProfileActivity.this, DashboardActivity.class);

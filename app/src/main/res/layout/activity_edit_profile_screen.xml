@@ -245,4 +245,11 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+
+    <!--<de.codecrafters.tableview.TableView
+        xmlns:table="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/as_table_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        table:tableView_columnCount="4" />-->
 </ScrollView>

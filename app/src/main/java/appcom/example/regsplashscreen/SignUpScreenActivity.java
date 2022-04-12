@@ -97,6 +97,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
                             .setDrivingLicenseNo(edtDrivingLicenseNo.getText().toString())
                             .setEncodedImage(base64EncodedImage)
                             .setUserActive("Y")
+                            .setUserAdmin("N")
                             .build();
                     String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                     // SET VALUE IN DATABASE

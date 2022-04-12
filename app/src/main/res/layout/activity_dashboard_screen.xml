@@ -310,6 +310,12 @@
                 app:layout_constraintLeft_toRightOf="@+id/ds_tv_aadhar_no_key"
                 app:layout_constraintTop_toBottomOf="@+id/ds_tv_email_id_val" />
 
+           <!-- <de.codecrafters.tableview.TableView
+                xmlns:table="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/as_table_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />-->
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 </ScrollView>

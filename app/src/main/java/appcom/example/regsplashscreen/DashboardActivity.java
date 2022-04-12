@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
     private ActivityResultLauncher<String> launcher;
     private FirebaseDatabase mDatabase;
     private DatabaseReference databaseReference;
+    private boolean isAdmin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,6 @@ public class DashboardActivity extends AppCompatActivity {
         TextView details_aadhar_no = findViewById(R.id.ds_tv_aadhar_no_val);
         TextView details_username = findViewById(R.id.ds_tv_username_val);
 
-
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,6 +68,17 @@ public class DashboardActivity extends AppCompatActivity {
                     if (Objects.equals(item.getKey(), uid))
                     {
                         User user= item.getValue(User.class);
+                        if(null == user.getUserActive() || !user.getUserActive().equals("Y")) {
+                            Toast.makeText(DashboardActivity.this, "User disabled. Please contact administrator", Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
+                            Intent intent = new Intent(DashboardActivity.this, SignInScreenActivity.class);
+                            startActivity(intent);
+                            break;
+                        }
+                        if(null != user.getUserAdmin() && user.getUserAdmin().equals("Y")) {
+                            isAdmin = true;
+                            invalidateOptionsMenu();
+                        }
                         header_username.setText(Objects.requireNonNull(user).getUserName());
                         header_designation.setText(user.getDrivingLicenseNo());
                         header_country.setText(user.getVoterIdNo());
@@ -99,6 +110,10 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu_dashboard, menu);
+        if(isAdmin) {
+            menu.getItem(2).setEnabled(true);
+            menu.getItem(2).setVisible(true);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -114,6 +129,10 @@ public class DashboardActivity extends AppCompatActivity {
                 mAuth.signOut();
                 Intent si_intent = new Intent(DashboardActivity.this, SignInScreenActivity.class);
                 startActivity(si_intent);
+                return true;
+            case R.id.admin_screen:
+                Intent as_intent = new Intent(DashboardActivity.this, AdminScreenActivity.class);
+                startActivity(as_intent);
                 return true;
             default:
                 return super.onContextItemSelected(item);
