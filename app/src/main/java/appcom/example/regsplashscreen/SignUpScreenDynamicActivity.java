@@ -70,6 +70,7 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_dynamic_screen);
         addInfoCardSectionLayout = (LinearLayout) findViewById(R.id.sud_add_info_card_section);
 
+        // INITIALIZE PROGRESS DIALOG BOX
         progressDialog = new ProgressDialog(SignUpScreenDynamicActivity.this);
         progressDialog.setTitle("Creating Account");
         progressDialog.setMessage("Creating Account");
@@ -108,7 +109,6 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(view -> {
             progressDialog.show();
             mAuth.createUserWithEmailAndPassword(edtEmailId.getText().toString(), edtPassword.getText().toString()).addOnCompleteListener(task -> {
-                progressDialog.dismiss();
                 if (task.isSuccessful()) {
                     // STORE USER DETAILS IN MODEL
                     User user = User.Builder.newInstance()
@@ -124,6 +124,7 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
                     String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                     // SET VALUE IN DATABASE
                     mDatabase.getReference().child("users").child(userId).setValue(user);
+                    progressDialog.dismiss();
                     // SWITCH TO SIGN IN SCREEN ONCE USER IS REGISTERED IN THE DATABASE
                     Intent intent = new Intent(getApplicationContext(), SignInScreenActivity.class);
                     startActivity(intent);
@@ -175,7 +176,7 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         CardView claiCardView = (CardView) layoutInflater.inflate(R.layout.card_layout_add_info, null);
         TextView tvDocumentName = (TextView) claiCardView.findViewById(R.id.clai_doc_name);
         tvDocumentName.setText(edtDocName.getText());
-        EditText edtDocumentName = (EditText) claiCardView.findViewById(R.id.clai_edtxt_doc_name);
+        EditText edtDocumentName = (EditText) claiCardView.findViewById(R.id.clai_edtxt_doc_id);
         edtDocumentName.setText(edtDocId.getText());
         if(!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
@@ -186,6 +187,7 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
                     .setDocId(edtDocId.getText().toString())
                     .setDocEncodedImage(null)
                     .build());
+            // ADD CARD VIEW TO MAIN VIEW
             addInfoCardSectionLayout.addView(claiCardView);
         }
     }

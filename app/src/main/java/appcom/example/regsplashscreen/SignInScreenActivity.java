@@ -62,7 +62,7 @@ public class SignInScreenActivity extends AppCompatActivity {
                     mAuth.signInWithEmailAndPassword(edtxtEmailId.getText().toString(), edtxtPwd.getText().toString()).addOnCompleteListener(task -> {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                                Intent intent = new Intent(SignInScreenActivity.this, DashboardActivity.class);
+                                Intent intent = new Intent(SignInScreenActivity.this, DashboardDynamicActivity.class);
                                 startActivity(intent);
                         } else
                             Toast.makeText(SignInScreenActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();

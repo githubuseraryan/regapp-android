@@ -45,4 +45,5 @@
     <string name="doc_img">Document Image</string>
     <string name="button_okay">Okay</string>
     <string name="button_cancel">Cancel</string>
+    <string name="header_image">Header Image</string>
 </resources>

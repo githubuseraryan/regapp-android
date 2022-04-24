@@ -59,7 +59,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/ep_tv_username"
+                        android:id="@+id/epd_tv_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/name"
@@ -67,7 +67,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/ep_edtxt_username"
+                        android:id="@+id/epd_edtxt_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autofillHints="Name"
@@ -109,6 +109,38 @@
                         android:inputType="date" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                app:cardMaxElevation="12dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/epd_tv_email_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/epd_edtxt_email_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="Email Id"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:hint="@string/enter_email"
+                        android:inputType="textEmailAddress" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
         <Button
@@ -130,6 +162,16 @@
             android:text="@string/save_profile"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/epd_forgot_password_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/reset_password"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>
