@@ -19,9 +19,6 @@
         <activity android:name=".SignUpScreenDynamicActivity" />
         <activity android:name=".EditProfileDynamicActivity" />
         <activity android:name=".AdminScreenActivity" />
-        <activity android:name=".EditProfileActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".SignUpScreenActivity" />
         <activity android:name=".SignInScreenActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">

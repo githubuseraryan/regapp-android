@@ -126,7 +126,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Toast.makeText(EditProfileActivity.this, "Something Went Wrong", Toast.LENGTH_LONG).show();
+                // Toast.makeText(EditProfileDynamicActivity.this, "Something Went Wrong", Toast.LENGTH_LONG).show();
             }
         });
 

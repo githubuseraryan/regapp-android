@@ -45,7 +45,7 @@ public class DashboardDynamicActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_dynamic);
+        setContentView(R.layout.activity_dashboard_dynamic_screen);
         addInfoCardSectionLayout = (LinearLayout) findViewById(R.id.dds_view_info_card_section);
 
         // INITIALIZE PROGRESS DIALOG BOX

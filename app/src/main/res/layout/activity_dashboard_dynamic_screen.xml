@@ -59,7 +59,6 @@
                 android:id="@+id/dds_username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/name"
                 android:textColor="@color/colorPrimaryDark"
                 android:textAlignment="center"
                 android:textAllCaps="true"
@@ -69,7 +68,6 @@
                 android:id="@+id/dds_email_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/email"
                 android:textColor="@color/colorPrimaryDark"
                 android:textAlignment="center"
                 android:textSize="15sp" />
@@ -78,7 +76,6 @@
                 android:id="@+id/dds_dob"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/date_of_birth"
                 android:textColor="@color/colorPrimaryDark"
                 android:textAlignment="center"
                 android:textSize="15sp" />
