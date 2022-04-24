@@ -2,6 +2,10 @@ package appcom.example.regsplashscreen.model;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class User {
 
     private String uid;
@@ -15,6 +19,7 @@ public class User {
     private String encodedImage;
     private String userActive;
     private String userAdmin;
+    private List<DocumentDetails> documentDetailsList;
 
     private User() {
     }
@@ -31,6 +36,7 @@ public class User {
         this.encodedImage = builder.encodedImage;
         this.userActive = builder.userActive;
         this.userAdmin = builder.userAdmin;
+        this.documentDetailsList = builder.documentDetailsList;
     }
 
     public static class Builder {
@@ -45,6 +51,7 @@ public class User {
         private String encodedImage;
         private String userActive;
         private String userAdmin;
+        private List<DocumentDetails> documentDetailsList;
 
         public static Builder newInstance()
         {
@@ -72,6 +79,7 @@ public class User {
                     ", encodedImage='" + encodedImage + '\'' +
                     ", userActive='" + userActive + '\'' +
                     ", userAdmin='" + userAdmin + '\'' +
+                    ", documentDetails='" + documentDetailsList + '\'' +
                     '}';
         }
 
@@ -121,6 +129,20 @@ public class User {
             this.userAdmin = userAdmin;
             return this;
         }
+        public Builder setDocumentDetailsList(DocumentDetails documentDetails) {
+            if(this.documentDetailsList == null) {
+                this.documentDetailsList = new ArrayList<>();
+            }
+            this.documentDetailsList.add(documentDetails);
+            return this;
+        }
+        public Builder setDocumentDetailsList(Collection<? extends DocumentDetails> documentDetailsList) {
+            if(this.documentDetailsList == null) {
+                this.documentDetailsList = new ArrayList<>();
+            }
+            this.documentDetailsList.addAll(documentDetailsList);
+            return this;
+        }
     }
 
     public String getUid() {
@@ -160,5 +182,7 @@ public class User {
     public String getUserActive() { return userActive; }
 
     public String getUserAdmin() { return userAdmin; }
+
+    public List<DocumentDetails> getDocumentDetailsList() { return documentDetailsList; }
 
 }

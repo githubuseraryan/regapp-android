@@ -49,7 +49,7 @@ public class SignInScreenActivity extends AppCompatActivity {
 
         // SIGN UP BUTTON LISTENER
         signUpButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SignInScreenActivity.this, SignUpScreenActivity.class);
+            Intent intent = new Intent(SignInScreenActivity.this, SignUpScreenDynamicActivity.class);
             startActivity(intent);
         });
 

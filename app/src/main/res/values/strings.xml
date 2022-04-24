@@ -37,4 +37,12 @@
     <string name="enable_user">Enable</string>
     <string name="disable_user">Disable</string>
     <string name="admin_screen">Admin Screen</string>
+    <string name="add_doc">Add Document</string>
+    <string name="doc_name">Document Name</string>
+    <string name="enter_doc_name">Enter Document Name</string>
+    <string name="doc_id">Document ID</string>
+    <string name="enter_doc_id">Enter Document ID</string>
+    <string name="doc_img">Document Image</string>
+    <string name="button_okay">Okay</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

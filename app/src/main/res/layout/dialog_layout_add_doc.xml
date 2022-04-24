@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dlad_doc_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doc_name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/dlad_edtxt_doc_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Name"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:hint="@string/enter_doc_name"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/dlad_doc_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doc_id"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/dlad_edtxt_doc_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Name"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:hint="@string/enter_doc_id"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/dlad_doc_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doc_img"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:id="@+id/dlad_doc_img"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/shape_user"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/registered" />
+
+            <ImageButton
+                android:id="@+id/dlad_upload_doc_img_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="80dp"
+                android:background="@color/colorPrimary"
+                android:clickable="true"
+                android:contentDescription="@string/profile_pic"
+                android:focusable="true"
+                android:src="@android:drawable/ic_menu_edit" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:id="@+id/dlad_btn_okay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/button_okay"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/dlad_btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/button_cancel"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

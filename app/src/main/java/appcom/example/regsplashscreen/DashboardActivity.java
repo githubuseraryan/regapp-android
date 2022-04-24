@@ -122,7 +122,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.edit_profile:
-                Intent ed_intent = new Intent(DashboardActivity.this, EditProfileActivity.class);
+                Intent ed_intent = new Intent(DashboardActivity.this, EditProfileDynamicActivity.class);
                 startActivity(ed_intent);
                 return true;
             case R.id.sign_out:
