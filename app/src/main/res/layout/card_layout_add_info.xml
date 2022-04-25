@@ -42,7 +42,7 @@
                 android:src="@android:drawable/ic_menu_share" />
 
             <ImageButton
-                android:id="@+id/clai_copy_button"
+                android:id="@+id/clai_view_doc_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="#00FF00"

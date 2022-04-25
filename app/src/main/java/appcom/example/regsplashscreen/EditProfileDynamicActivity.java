@@ -203,8 +203,40 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         tvDocumentImageString.setText(documentDetails.getDocEncodedImage());
         tvDocumentImageString.setTag("TAG_"+viewTagCounter+"_TVDIMG");
 
+        // INITIALIZE IMAGE BUTTONS
+        ImageButton viewDocImageButton = (ImageButton) claiCardView.findViewById(R.id.clai_view_doc_button);
+        viewDocImageButton.setOnClickListener(buttonView -> {
+            openDocImageDialog(tvDocumentImageString);
+        });
+
         // ADD CARD VIEW TO MAIN VIEW
         addInfoCardSectionLayout.addView(claiCardView);
+    }
+
+    private void openDocImageDialog(TextView tvDocumentImageString) {
+        // INITIALIZE ALERT BOX
+        AlertDialog.Builder docImageDialogBox = new AlertDialog.Builder(EditProfileDynamicActivity.this);
+
+        // INFLATE CUSTOM DIALOG BOX
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_layout_view_doc_image, null);
+
+        // INITIALIZE DIALOG BOX BUTTONS & VIEWS
+        ImageView ivDocImage = (ImageView) dialogView.findViewById(R.id.dlvdi_doc_img);
+        Bitmap docImageBmp = LocalBase64Util.decodeBase64StringToImage(tvDocumentImageString.getText().toString());
+        ivDocImage.setImageBitmap(docImageBmp);
+
+        Button dialogCloseBtn = (Button) dialogView.findViewById(R.id.dlvdi_btn_close);
+
+        // ALERT DIALOG BOX SETTINGS
+        docImageDialogBox.setView(dialogView);
+        AlertDialog addDocImageDialog = docImageDialogBox.create();
+        addDocImageDialog.setCanceledOnTouchOutside(false);
+
+        // DIALOG CLOSE BUTTON ACTION
+        dialogCloseBtn.setOnClickListener(view -> {
+            addDocImageDialog.dismiss();
+        });
+        addDocImageDialog.show();
     }
 
     // ADD NEW DOCUMENT

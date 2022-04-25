@@ -129,7 +129,7 @@ public class DashboardDynamicActivity extends AppCompatActivity {
         // INITIALIZE IMAGE BUTTONS
         ImageButton viewDocImageButton = (ImageButton) clviCardView.findViewById(R.id.clvi_view_doc_button);
         viewDocImageButton.setOnClickListener(buttonView -> {
-            openDocImageDialog(buttonView, tvDocImageString);
+            openDocImageDialog(tvDocImageString);
         });
 
         ++viewTagCounter;
@@ -142,7 +142,7 @@ public class DashboardDynamicActivity extends AppCompatActivity {
         addInfoCardSectionLayout.addView(clviCardView);
     }
 
-    private void openDocImageDialog(View buttonView, TextView tvDocImageString) {
+    private void openDocImageDialog(TextView tvDocImageString) {
         // INITIALIZE ALERT BOX
         AlertDialog.Builder docImageDialogBox = new AlertDialog.Builder(DashboardDynamicActivity.this);
 

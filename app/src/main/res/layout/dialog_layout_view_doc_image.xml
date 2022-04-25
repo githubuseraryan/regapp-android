@@ -5,6 +5,10 @@
     android:orientation="vertical"
     android:padding="15dp">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/dlvdi_doc_img"
             android:layout_width="match_parent"
@@ -13,14 +17,16 @@
             android:contentDescription="@string/app_name"
             android:src="@drawable/registered" />
 
-        <Button
-            android:id="@+id/dlvdi_btn_close"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/button_close"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/dlvdi_btn_close"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/button_close"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
 
 </LinearLayout>

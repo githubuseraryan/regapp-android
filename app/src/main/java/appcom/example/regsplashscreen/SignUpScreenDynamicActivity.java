@@ -209,19 +209,48 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         edtDocumentName.setText(edtDocId.getText());
         TextView tvDocImageString = (TextView) claiCardView.findViewById(R.id.clai_doc_encoded_image);
         tvDocImageString.setText(docImageBase64String);
+
+        // INITIALIZE IMAGE BUTTONS
+        ImageButton viewDocImageButton = (ImageButton) claiCardView.findViewById(R.id.clai_view_doc_button);
+        viewDocImageButton.setOnClickListener(buttonView -> {
+            openDocImageDialog(tvDocImageString);
+        });
+
         if(!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
             tvDocumentName.setTag("TAG_" +viewTagCounter+"_TVDC");
             edtDocumentName.setTag("TAG_" +viewTagCounter+"_EDID");
             tvDocImageString.setTag("TAG_" +viewTagCounter+"_TVDIMG");
-            /*documentDetailsList.add(DocumentDetails.Builder.newInstance()
-                    .setDocName(edtDocName.getText().toString())
-                    .setDocId(edtDocId.getText().toString())
-                    .setDocEncodedImage(null)
-                    .build());*/
+
             // ADD CARD VIEW TO MAIN VIEW
             addInfoCardSectionLayout.addView(claiCardView);
         }
+    }
+
+    private void openDocImageDialog(TextView tvDocImageString) {
+        // INITIALIZE ALERT BOX
+        AlertDialog.Builder docImageDialogBox = new AlertDialog.Builder(SignUpScreenDynamicActivity.this);
+
+        // INFLATE CUSTOM DIALOG BOX
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_layout_view_doc_image, null);
+
+        // INITIALIZE DIALOG BOX BUTTONS & VIEWS
+        ImageView ivDocImage = (ImageView) dialogView.findViewById(R.id.dlvdi_doc_img);
+        Bitmap docImageBmp = LocalBase64Util.decodeBase64StringToImage(tvDocImageString.getText().toString());
+        ivDocImage.setImageBitmap(docImageBmp);
+
+        Button dialogCloseBtn = (Button) dialogView.findViewById(R.id.dlvdi_btn_close);
+
+        // ALERT DIALOG BOX SETTINGS
+        docImageDialogBox.setView(dialogView);
+        AlertDialog addDocImageDialog = docImageDialogBox.create();
+        addDocImageDialog.setCanceledOnTouchOutside(false);
+
+        // DIALOG CLOSE BUTTON ACTION
+        dialogCloseBtn.setOnClickListener(view -> {
+            addDocImageDialog.dismiss();
+        });
+        addDocImageDialog.show();
     }
 
     // CAMERA/GALLERY SELECTOR DIALOG BOX
