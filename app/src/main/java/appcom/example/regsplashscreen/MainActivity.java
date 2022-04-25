@@ -18,19 +18,16 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //This method is used so that your splash activity
         //can cover the entire screen.
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(MainActivity.this,
-                        SignInScreenActivity.class);
-                //Intent is used to switch from one activity to another.
+        new Handler().postDelayed(() -> {
+            Intent i = new Intent(MainActivity.this,
+                    SignInScreenActivity.class);
+            //Intent is used to switch from one activity to another.
 
-                startActivity(i);
-                //invoke the SignInScreenActivity.
+            startActivity(i);
+            //invoke the SignInScreenActivity.
 
-                finish();
-                //the current activity will get finished.
-            }
+            finish();
+            //the current activity will get finished.
         }, SPLASH_SCREEN_TIME_OUT);
     }
 }

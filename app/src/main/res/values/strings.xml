@@ -46,4 +46,10 @@
     <string name="button_okay">Okay</string>
     <string name="button_cancel">Cancel</string>
     <string name="header_image">Header Image</string>
+    <string name="enable_disable">Enable/Disable</string>
+    <string name="switch_enabled">Enabled</string>
+    <string name="switch_disabled">Disabled</string>
+    <string name="is_admin">Admin Access</string>
+    <string name="is_admin_yes">Y</string>
+    <string name="is_admin_no">N</string>
 </resources>

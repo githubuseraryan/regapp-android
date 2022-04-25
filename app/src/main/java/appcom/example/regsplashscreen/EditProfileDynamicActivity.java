@@ -49,27 +49,20 @@ import appcom.example.regsplashscreen.util.LocalBase64Util;
 
 public class EditProfileDynamicActivity extends AppCompatActivity {
 
-    private Button addDocumentButton, saveProfileButton;
-    private Context context;
     private LinearLayout addInfoCardSectionLayout;
-    private CardView claiCardView;
     private int viewTagCounter = 0;
     private FirebaseDatabase mDatabase;
     private FirebaseAuth mAuth;
-    private DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
     private String emailId;
 
-    String[] cameraPermission;
-    String[] storagePermission;
-    Uri imageUri;
-    String base64EncodedImage = null;
-    ImageView profilePic;
-    Bundle savedState;
-    List<DocumentDetails> documentDetailsList = new ArrayList<>();
+    private String[] cameraPermission;
+    private String[] storagePermission;
+    private Uri imageUri;
+    private ImageView profilePic;
+    private Bundle savedState;
+    private final List<DocumentDetails> documentDetailsList = new ArrayList<>();
 
-    private final String TEXT_VIEW_TAG_PREFIX = "textViewTag";
-    private final String EDIT_TEXT_TAG_PREFIX = "editTextTag";
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
     private static final int IMAGEPICK_GALLERY_REQUEST = 300;
@@ -79,7 +72,6 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile_dynamic_screen);
-        context = getApplicationContext();
         addInfoCardSectionLayout = (LinearLayout) findViewById(R.id.epd_add_info_card_section);
 
         // INITIALIZE PROGRESS DIALOG BOX
@@ -91,10 +83,10 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         String uid = mAuth.getUid();
-        databaseReference = mDatabase.getReference().child("users");
+        DatabaseReference databaseReference = mDatabase.getReference().child("users");
 
         // INITIALIZE BUTTONS
-        addDocumentButton = findViewById(R.id.epd_add_doc_button);
+        Button addDocumentButton = findViewById(R.id.epd_add_doc_button);
         Button saveProfileButton = findViewById(R.id.epd_save_profile_button);
         Button forgotPasswordButton = findViewById(R.id.epd_forgot_password_button);
         ImageButton editProfilePicButton = findViewById(R.id.epd_edit_profile_pic_button);
@@ -152,7 +144,6 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                             ((BitmapDrawable) profilePic.getDrawable()).getBitmap() : null))
                     .setDocumentDetailsList(documentDetailsList)
                     .setUserActive("Y")
-                    .setUserAdmin("Y")
                     .build();
             mDatabase.getReference().child("users").child(uid).setValue(userDetails);
             Intent intent = new Intent(EditProfileDynamicActivity.this, DashboardDynamicActivity.class);
@@ -224,15 +215,15 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // USE card_layout_add_info.xml TO CREATE LAYOUT
-        claiCardView = (CardView) layoutInflater.inflate(R.layout.card_layout_add_info, null);
+        CardView claiCardView = (CardView) layoutInflater.inflate(R.layout.card_layout_add_info, null);
         TextView tvDocumentName = (TextView) claiCardView.findViewById(R.id.clai_doc_name);
         tvDocumentName.setText(edtDocName.getText());
         EditText edtDocumentName = (EditText) claiCardView.findViewById(R.id.clai_edtxt_doc_id);
         edtDocumentName.setText(edtDocId.getText());
         if(!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
-            tvDocumentName.setTag(TEXT_VIEW_TAG_PREFIX+viewTagCounter);
-            edtDocumentName.setTag(EDIT_TEXT_TAG_PREFIX+viewTagCounter);
+            tvDocumentName.setTag("textViewTag" +viewTagCounter);
+            edtDocumentName.setTag("editTextTag" +viewTagCounter);
             documentDetailsList.add(DocumentDetails.Builder.newInstance()
                     .setDocName(edtDocName.getText().toString())
                     .setDocId(edtDocId.getText().toString())
@@ -362,7 +353,6 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                 imageStream = this.getContentResolver().openInputStream(imageUri);
                 Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
                 profilePic.setImageBitmap(bitmapImage);
-                base64EncodedImage = LocalBase64Util.encodeImageToBase64String(bitmapImage);
             } catch (IOException e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }

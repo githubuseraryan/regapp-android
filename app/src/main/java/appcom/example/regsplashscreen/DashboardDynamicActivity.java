@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -36,9 +35,6 @@ public class DashboardDynamicActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
-    private ActivityResultLauncher<String> launcher;
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference databaseReference;
     private boolean isAdmin = false;
     private LinearLayout addInfoCardSectionLayout;
 
@@ -50,15 +46,15 @@ public class DashboardDynamicActivity extends AppCompatActivity {
 
         // INITIALIZE PROGRESS DIALOG BOX
         progressDialog = new ProgressDialog(DashboardDynamicActivity.this);
-        progressDialog.setTitle("Updating dashboard");
-        progressDialog.setMessage("Updating dashboard");
+        progressDialog.setTitle("Fetching details");
+        progressDialog.setMessage("Fetching details");
         progressDialog.show();
 
         // FIREBASE AUTH DETAILS
-        mDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         String uid = mAuth.getUid();
-        databaseReference = mDatabase.getReference().child("users");
+        DatabaseReference databaseReference = mDatabase.getReference().child("users");
 
         // INITIALIZE BUTTONS
         ImageButton editProfileButton = findViewById(R.id.dds_edit_profile_button);

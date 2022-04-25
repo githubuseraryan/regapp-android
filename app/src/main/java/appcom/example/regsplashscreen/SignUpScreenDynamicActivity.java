@@ -46,19 +46,16 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
 
     private LinearLayout addInfoCardSectionLayout;
     private int viewTagCounter = 0;
+    private ProgressDialog progressDialog;
+    private FirebaseAuth mAuth;
+    private String[] cameraPermission;
+    private String[] storagePermission;
+    private Uri imageUri;
+    private String base64EncodedImage = null;
+    private ImageView profilePic;
+    private Bundle savedState;
+    private final List<DocumentDetails> documentDetailsList = new ArrayList<>();
 
-    ProgressDialog progressDialog;
-    FirebaseAuth mAuth;
-    String[] cameraPermission;
-    String[] storagePermission;
-    Uri imageUri;
-    String base64EncodedImage = null;
-    ImageView profilePic;
-    Bundle savedState;
-    List<DocumentDetails> documentDetailsList = new ArrayList<>();
-
-    private final String TEXT_VIEW_TAG_PREFIX = "textViewTag";
-    private final String EDIT_TEXT_TAG_PREFIX = "editTextTag";
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
     private static final int IMAGEPICK_GALLERY_REQUEST = 300;
@@ -119,7 +116,7 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
                             .setEncodedImage(base64EncodedImage)
                             .setDocumentDetailsList(documentDetailsList)
                             .setUserActive("Y")
-                            .setUserAdmin("Y")
+                            .setUserAdmin("N")
                             .build();
                     String userId = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                     // SET VALUE IN DATABASE
@@ -180,8 +177,8 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         edtDocumentName.setText(edtDocId.getText());
         if(!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
-            tvDocumentName.setTag(TEXT_VIEW_TAG_PREFIX+viewTagCounter);
-            edtDocumentName.setTag(EDIT_TEXT_TAG_PREFIX+viewTagCounter);
+            tvDocumentName.setTag("textViewTag" +viewTagCounter);
+            edtDocumentName.setTag("editTextTag" +viewTagCounter);
             documentDetailsList.add(DocumentDetails.Builder.newInstance()
                     .setDocName(edtDocName.getText().toString())
                     .setDocId(edtDocId.getText().toString())
