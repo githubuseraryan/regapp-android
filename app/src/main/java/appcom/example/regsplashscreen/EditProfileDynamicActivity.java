@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -49,6 +50,12 @@ import appcom.example.regsplashscreen.util.LocalBase64Util;
 
 public class EditProfileDynamicActivity extends AppCompatActivity {
 
+    private static final int CAMERA_REQUEST = 100;
+    private static final int STORAGE_REQUEST = 200;
+    private static final int IMAGEPICK_GALLERY_REQUEST = 300;
+    private static final int IMAGE_PICKCAMERA_REQUEST = 400;
+    private static final String SELECT_PROFILE_PIC = "Select Profile pic";
+    private static final String SELECT_DOCUMENT_PIC = "Select Document pic";
     private LinearLayout addInfoCardSectionLayout;
     private int viewTagCounter = 0;
     private FirebaseDatabase mDatabase;
@@ -63,13 +70,6 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
     private String selectPicType;
     private ImageView ivDocImage;
     private String docImageBase64String = null;
-
-    private static final int CAMERA_REQUEST = 100;
-    private static final int STORAGE_REQUEST = 200;
-    private static final int IMAGEPICK_GALLERY_REQUEST = 300;
-    private static final int IMAGE_PICKCAMERA_REQUEST = 400;
-    private static final String SELECT_PROFILE_PIC = "Select Profile pic";
-    private static final String SELECT_DOCUMENT_PIC = "Select Document pic";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +113,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                         edtDOB.setText(user.getDob());
                         profilePic.setImageBitmap(LocalBase64Util.decodeBase64StringToImage(user.getEncodedImage()));
                         emailId = user.getEmailId();
-                        if(null != user.getDocumentDetailsList()) {
+                        if (null != user.getDocumentDetailsList()) {
                             user.getDocumentDetailsList().forEach(documentDetails -> addDocumentInEditProfileScreen(documentDetails));
                         }
                     }
@@ -168,12 +168,12 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
 
     // GATHER UP DOC DETAILS FROM SCREEN
     private List<DocumentDetails> fetchDocumentDetails() {
-        List <DocumentDetails> documentDetails = new ArrayList<>();
-        for(int i = 1; i <= viewTagCounter; i++) {
-            TextView docName = (TextView) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_TVDC");
+        List<DocumentDetails> documentDetails = new ArrayList<>();
+        for (int i = 1; i <= viewTagCounter; i++) {
+            TextView docName = (TextView) addInfoCardSectionLayout.findViewWithTag("TAG_" + i + "_TVDC");
             if (null != docName) {
-                EditText docId = (EditText) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_EDID");
-                TextView docImageString = (TextView) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_TVDIMG");
+                EditText docId = (EditText) addInfoCardSectionLayout.findViewWithTag("TAG_" + i + "_EDID");
+                TextView docImageString = (TextView) addInfoCardSectionLayout.findViewWithTag("TAG_" + i + "_TVDIMG");
                 documentDetails.add(DocumentDetails.Builder.newInstance()
                         .setDocName(docName.getText().toString())
                         .setDocId(null != docId.getText() ? docId.getText().toString() : null)
@@ -195,18 +195,23 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         CardView claiCardView = (CardView) layoutInflater.inflate(R.layout.card_layout_add_info, null);
         TextView tvDocumentName = (TextView) claiCardView.findViewById(R.id.clai_doc_name);
         tvDocumentName.setText(documentDetails.getDocName());
-        tvDocumentName.setTag("TAG_"+viewTagCounter+"_TVDC");
+        tvDocumentName.setTag("TAG_" + viewTagCounter + "_TVDC");
         EditText edTextDocumentId = (EditText) claiCardView.findViewById(R.id.clai_edtxt_doc_id);
         edTextDocumentId.setText(documentDetails.getDocId());
-        edTextDocumentId.setTag("TAG_"+viewTagCounter+"_EDID");
+        edTextDocumentId.setTag("TAG_" + viewTagCounter + "_EDID");
         TextView tvDocumentImageString = (TextView) claiCardView.findViewById(R.id.clai_doc_encoded_image);
         tvDocumentImageString.setText(documentDetails.getDocEncodedImage());
-        tvDocumentImageString.setTag("TAG_"+viewTagCounter+"_TVDIMG");
+        tvDocumentImageString.setTag("TAG_" + viewTagCounter + "_TVDIMG");
 
-        // INITIALIZE IMAGE BUTTONS
+        // INITIALIZE & DEFINE IMAGE BUTTONS FOR CARD ACTIONS
         ImageButton viewDocImageButton = (ImageButton) claiCardView.findViewById(R.id.clai_view_doc_button);
-        viewDocImageButton.setOnClickListener(buttonView -> {
-            openDocImageDialog(tvDocumentImageString);
+        viewDocImageButton.setOnClickListener(buttonView -> openDocImageDialog(tvDocumentImageString));
+
+        ImageButton deleteCardButton = (ImageButton) claiCardView.findViewById(R.id.clai_delete_card_button);
+        deleteCardButton.setOnClickListener(buttonView -> {
+            ViewGroup cardView = (ViewGroup) buttonView.getParent().getParent().getParent();
+            ViewGroup parentView = (ViewGroup) cardView.getParent();
+            parentView.removeView(cardView);
         });
 
         // ADD CARD VIEW TO MAIN VIEW
@@ -291,11 +296,11 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         edtDocumentName.setText(edtDocId.getText());
         TextView tvDocImageString = (TextView) claiCardView.findViewById(R.id.clai_doc_encoded_image);
         tvDocImageString.setText(docImageBase64String);
-        if(!edtDocName.getText().toString().isEmpty()) {
+        if (!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
-            tvDocumentName.setTag("TAG_" +viewTagCounter+"_TVDC");
-            edtDocumentName.setTag("TAG_" +viewTagCounter+"_EDID");
-            tvDocImageString.setTag("TAG_" +viewTagCounter+"_TVDIMG");
+            tvDocumentName.setTag("TAG_" + viewTagCounter + "_TVDC");
+            edtDocumentName.setTag("TAG_" + viewTagCounter + "_EDID");
+            tvDocImageString.setTag("TAG_" + viewTagCounter + "_TVDIMG");
 
             // ADD CARD VIEW TO MAIN VIEW
             addInfoCardSectionLayout.addView(claiCardView);
@@ -409,8 +414,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
             if (requestCode == IMAGE_PICKCAMERA_REQUEST && savedState != null) {
                 uploadProfileCoverPhoto((Uri) savedState.getParcelable("imageUri"));
             }
-        }
-        else if (resultCode == Activity.RESULT_OK && selectPicType.equals(SELECT_DOCUMENT_PIC)) {
+        } else if (resultCode == Activity.RESULT_OK && selectPicType.equals(SELECT_DOCUMENT_PIC)) {
             if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
                 imageUri = data.getData();
                 uploadDocumentPicture(imageUri);

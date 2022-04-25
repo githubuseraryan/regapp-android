@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -214,6 +215,13 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         ImageButton viewDocImageButton = (ImageButton) claiCardView.findViewById(R.id.clai_view_doc_button);
         viewDocImageButton.setOnClickListener(buttonView -> {
             openDocImageDialog(tvDocImageString);
+        });
+
+        ImageButton deleteCardButton = (ImageButton) claiCardView.findViewById(R.id.clai_delete_card_button);
+        deleteCardButton.setOnClickListener(buttonView -> {
+            ViewGroup cardView = (ViewGroup) buttonView.getParent().getParent().getParent();
+            ViewGroup parentView = (ViewGroup) cardView.getParent();
+            parentView.removeView(cardView);
         });
 
         if(!edtDocName.getText().toString().isEmpty()) {
