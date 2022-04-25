@@ -132,6 +132,11 @@ public class DashboardDynamicActivity extends AppCompatActivity {
             openDocImageDialog(tvDocImageString);
         });
 
+        ImageButton shareDocDetailsButton = (ImageButton) clviCardView.findViewById(R.id.clvi_share_button);
+        shareDocDetailsButton.setOnClickListener(buttonView -> {
+            shareDocDetails(documentDetails);
+        });
+
         ++viewTagCounter;
         tvDocumentName.setTag("TAG_" +viewTagCounter+"_TVDN");
         tvDocumentId.setTag("TAG_" +viewTagCounter+"_TVDID");
@@ -140,6 +145,26 @@ public class DashboardDynamicActivity extends AppCompatActivity {
 
         // ADD CARD VIEW TO MAIN VIEW
         addInfoCardSectionLayout.addView(clviCardView);
+    }
+
+    // SHARE DOCUMENT DETAILS
+    private void shareDocDetails(DocumentDetails documentDetails) {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        // TYPE OF THE CONTENT TO BE SHARED
+        sharingIntent.setType("text/plain");
+
+        // BODY OF THE CONTENT
+        String shareBody = documentDetails.getDocName() + " : " + documentDetails.getDocId();
+
+        // SUBJECT OF THE CONTENT. YOU CAN SHARE ANYTHING
+        String shareSubject = "Sharing " + documentDetails.getDocName() + " details";
+
+        // PASSING BODY OF THE CONTENT
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+
+        // PASSING SUBJECT OF THE CONTENT
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
+        startActivity(Intent.createChooser(sharingIntent, "Share using"));
     }
 
     private void openDocImageDialog(TextView tvDocImageString) {

@@ -224,6 +224,9 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
             parentView.removeView(cardView);
         });
 
+        ImageButton shareDocDetailsButton = (ImageButton) claiCardView.findViewById(R.id.clai_share_button);
+        shareDocDetailsButton.setVisibility(View.GONE);
+
         if(!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
             tvDocumentName.setTag("TAG_" +viewTagCounter+"_TVDC");
