@@ -3,11 +3,14 @@ package appcom.example.regsplashscreen;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -37,6 +41,7 @@ public class DashboardDynamicActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private boolean isAdmin = false;
     private LinearLayout addInfoCardSectionLayout;
+    private int viewTagCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,17 +73,17 @@ public class DashboardDynamicActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot item: dataSnapshot.getChildren()) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     if (Objects.equals(item.getKey(), uid)) {
-                        User user= item.getValue(User.class);
-                        if(null == user.getUserActive() || !user.getUserActive().equals("Y")) {
+                        User user = item.getValue(User.class);
+                        if (null == user.getUserActive() || !user.getUserActive().equals("Y")) {
                             Toast.makeText(DashboardDynamicActivity.this, "User disabled. Please contact administrator", Toast.LENGTH_SHORT).show();
                             mAuth.signOut();
                             Intent intent = new Intent(DashboardDynamicActivity.this, SignInScreenActivity.class);
                             startActivity(intent);
                             break;
                         }
-                        if(null != user.getUserAdmin() && user.getUserAdmin().equals("Y")) {
+                        if (null != user.getUserAdmin() && user.getUserAdmin().equals("Y")) {
                             isAdmin = true;
                             invalidateOptionsMenu();
                         }
@@ -86,7 +91,7 @@ public class DashboardDynamicActivity extends AppCompatActivity {
                         tvEmailId.setText(user.getEmailId());
                         tvDob.setText(user.getDob());
                         profilePicture.setImageBitmap(LocalBase64Util.decodeBase64StringToImage(user.getEncodedImage()));
-                        if(null != user.getDocumentDetailsList()) {
+                        if (null != user.getDocumentDetailsList()) {
                             user.getDocumentDetailsList().forEach(documentDetails -> addDocumentInDashboard(documentDetails));
                         }
                         progressDialog.dismiss();
@@ -118,16 +123,56 @@ public class DashboardDynamicActivity extends AppCompatActivity {
         tvDocumentName.setText(documentDetails.getDocName());
         TextView tvDocumentId = (TextView) clviCardView.findViewById(R.id.clvi_doc_id);
         tvDocumentId.setText(documentDetails.getDocId());
+        TextView tvDocImageString = (TextView) clviCardView.findViewById(R.id.clvi_doc_encoded_image);
+        tvDocImageString.setText(documentDetails.getDocEncodedImage());
+
+        // INITIALIZE IMAGE BUTTONS
+        ImageButton viewDocImageButton = (ImageButton) clviCardView.findViewById(R.id.clvi_view_doc_button);
+        viewDocImageButton.setOnClickListener(buttonView -> {
+            openDocImageDialog(buttonView, tvDocImageString);
+        });
+
+        ++viewTagCounter;
+        tvDocumentName.setTag("TAG_" +viewTagCounter+"_TVDN");
+        tvDocumentId.setTag("TAG_" +viewTagCounter+"_TVDID");
+        tvDocImageString.setTag("TAG_" +viewTagCounter+"_TVDIMG");
+        viewDocImageButton.setTag("TAG_"+viewTagCounter+"_BTDOC");
 
         // ADD CARD VIEW TO MAIN VIEW
         addInfoCardSectionLayout.addView(clviCardView);
+    }
+
+    private void openDocImageDialog(View buttonView, TextView tvDocImageString) {
+        // INITIALIZE ALERT BOX
+        AlertDialog.Builder docImageDialogBox = new AlertDialog.Builder(DashboardDynamicActivity.this);
+
+        // INFLATE CUSTOM DIALOG BOX
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_layout_view_doc_image, null);
+
+        // INITIALIZE DIALOG BOX BUTTONS & VIEWS
+        ImageView ivDocImage = (ImageView) dialogView.findViewById(R.id.dlvdi_doc_img);
+        Bitmap docImageBmp = LocalBase64Util.decodeBase64StringToImage(tvDocImageString.getText().toString());
+        ivDocImage.setImageBitmap(docImageBmp);
+
+        Button dialogCloseBtn = (Button) dialogView.findViewById(R.id.dlvdi_btn_close);
+
+        // ALERT DIALOG BOX SETTINGS
+        docImageDialogBox.setView(dialogView);
+        AlertDialog addDocImageDialog = docImageDialogBox.create();
+        addDocImageDialog.setCanceledOnTouchOutside(false);
+
+        // DIALOG CLOSE BUTTON ACTION
+        dialogCloseBtn.setOnClickListener(view -> {
+            addDocImageDialog.dismiss();
+        });
+        addDocImageDialog.show();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu_dashboard, menu);
-        if(isAdmin) {
+        if (isAdmin) {
             menu.getItem(2).setEnabled(true);
             menu.getItem(2).setVisible(true);
         }

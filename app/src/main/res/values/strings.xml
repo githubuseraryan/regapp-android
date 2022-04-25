@@ -52,4 +52,5 @@
     <string name="is_admin">Admin Access</string>
     <string name="is_admin_yes">Y</string>
     <string name="is_admin_no">N</string>
+    <string name="button_close">close</string>
 </resources>
