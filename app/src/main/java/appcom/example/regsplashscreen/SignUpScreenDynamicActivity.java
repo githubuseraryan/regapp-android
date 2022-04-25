@@ -54,12 +54,17 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
     private String base64EncodedImage = null;
     private ImageView profilePic;
     private Bundle savedState;
-    private final List<DocumentDetails> documentDetailsList = new ArrayList<>();
+    // private final List<DocumentDetails> documentDetailsList = new ArrayList<>();
+    private String selectPicType;
+    private ImageView ivDocImage;
+    private String docImageBase64String = null;
 
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
     private static final int IMAGEPICK_GALLERY_REQUEST = 300;
     private static final int IMAGE_PICKCAMERA_REQUEST = 400;
+    private static final String SELECT_PROFILE_PIC = "Select Profile pic";
+    private static final String SELECT_DOCUMENT_PIC = "Select Document pic";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +104,7 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
 
         // EDIT PROFILE PIC BUTTON
         editProfilePicButton.setOnClickListener(v -> {
+            selectPicType = SELECT_PROFILE_PIC;
             showCameraGallerySelectorDialogBox();
         });
 
@@ -114,7 +120,7 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
                             .setEmailId(edtEmailId.getText().toString())
                             .setDob(edtDOB.getText().toString())
                             .setEncodedImage(base64EncodedImage)
-                            .setDocumentDetailsList(documentDetailsList)
+                            .setDocumentDetailsList(fetchDocumentDetails())
                             .setUserActive("Y")
                             .setUserAdmin("N")
                             .build();
@@ -132,6 +138,24 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         });
     }
 
+    // GATHER UP DOC DETAILS FROM SCREEN
+    private List<DocumentDetails> fetchDocumentDetails() {
+        List <DocumentDetails> documentDetails = new ArrayList<>();
+        for(int i = 1; i <= viewTagCounter; i++) {
+            TextView docName = (TextView) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_TVDC");
+            if (null != docName) {
+                EditText docId = (EditText) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_EDID");
+                TextView docImageString = (TextView) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_TVDIMG");
+                documentDetails.add(DocumentDetails.Builder.newInstance()
+                        .setDocName(docName.getText().toString())
+                        .setDocId(null != docId.getText() ? docId.getText().toString() : null)
+                        .setDocEncodedImage(null != docImageString.getText() ? docImageString.getText().toString() : null)
+                        .build());
+            }
+        }
+        return documentDetails;
+    }
+
     // ADD DOCUMENT DIALOG BOX
     private void addDocument() {
         // INITIALIZE ALERT BOX
@@ -145,6 +169,14 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         EditText edtDocId = (EditText) dialogView.findViewById(R.id.dlad_edtxt_doc_id);
         Button dialogOkayBtn = (Button) dialogView.findViewById(R.id.dlad_btn_okay);
         Button dialogCancelBtn = (Button) dialogView.findViewById(R.id.dlad_btn_cancel);
+
+        // INITIALIZE IMAGE VIEWS & DOC UPLOAD BUTTON
+        ivDocImage = (ImageView) dialogView.findViewById(R.id.dlad_doc_img);
+        ImageButton ivDocImageUploadButton = (ImageButton) dialogView.findViewById(R.id.dlad_upload_doc_img_button);
+        ivDocImageUploadButton.setOnClickListener(v -> {
+            selectPicType = SELECT_DOCUMENT_PIC;
+            showCameraGallerySelectorDialogBox();
+        });
 
         // SHOW ALERT DIALOG BOX
         addDocDetailsDialogBox.setView(dialogView);
@@ -175,15 +207,18 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         tvDocumentName.setText(edtDocName.getText());
         EditText edtDocumentName = (EditText) claiCardView.findViewById(R.id.clai_edtxt_doc_id);
         edtDocumentName.setText(edtDocId.getText());
+        TextView tvDocImageString = (TextView) claiCardView.findViewById(R.id.clai_doc_encoded_image);
+        tvDocImageString.setText(docImageBase64String);
         if(!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
-            tvDocumentName.setTag("textViewTag" +viewTagCounter);
-            edtDocumentName.setTag("editTextTag" +viewTagCounter);
-            documentDetailsList.add(DocumentDetails.Builder.newInstance()
+            tvDocumentName.setTag("TAG_" +viewTagCounter+"_TVDC");
+            edtDocumentName.setTag("TAG_" +viewTagCounter+"_EDID");
+            tvDocImageString.setTag("TAG_" +viewTagCounter+"_TVDIMG");
+            /*documentDetailsList.add(DocumentDetails.Builder.newInstance()
                     .setDocName(edtDocName.getText().toString())
                     .setDocId(edtDocId.getText().toString())
                     .setDocEncodedImage(null)
-                    .build());
+                    .build());*/
             // ADD CARD VIEW TO MAIN VIEW
             addInfoCardSectionLayout.addView(claiCardView);
         }
@@ -286,13 +321,21 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
     // ON SELECTION OF A PHOTO
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && selectPicType.equals(SELECT_PROFILE_PIC)) {
             if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
                 imageUri = data.getData();
                 uploadProfileCoverPhoto(imageUri);
             }
             if (requestCode == IMAGE_PICKCAMERA_REQUEST && savedState != null) {
                 uploadProfileCoverPhoto((Uri) savedState.getParcelable("imageUri"));
+            }
+        } else if (resultCode == Activity.RESULT_OK && selectPicType.equals(SELECT_DOCUMENT_PIC)) {
+            if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
+                imageUri = data.getData();
+                uploadDocumentPicture(imageUri);
+            }
+            if (requestCode == IMAGE_PICKCAMERA_REQUEST && savedState != null) {
+                uploadDocumentPicture((Uri) savedState.getParcelable("imageUri"));
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -307,6 +350,21 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
                 Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
                 profilePic.setImageBitmap(bitmapImage);
                 base64EncodedImage = LocalBase64Util.encodeImageToBase64String(bitmapImage);
+            } catch (IOException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    // UPLOAD DOCUMENT IMAGE
+    private void uploadDocumentPicture(Uri imageUri) {
+        InputStream imageStream = null;
+        if (imageUri != null) {
+            try {
+                imageStream = this.getContentResolver().openInputStream(imageUri);
+                Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
+                ivDocImage.setImageBitmap(bitmapImage);
+                docImageBase64String = LocalBase64Util.encodeImageToBase64String(bitmapImage);
             } catch (IOException e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }

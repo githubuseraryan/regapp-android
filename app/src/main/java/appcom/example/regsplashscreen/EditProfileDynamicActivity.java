@@ -55,18 +55,21 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
     private String emailId;
-
     private String[] cameraPermission;
     private String[] storagePermission;
     private Uri imageUri;
     private ImageView profilePic;
     private Bundle savedState;
-    private final List<DocumentDetails> documentDetailsList = new ArrayList<>();
+    private String selectPicType;
+    private ImageView ivDocImage;
+    private String docImageBase64String = null;
 
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
     private static final int IMAGEPICK_GALLERY_REQUEST = 300;
     private static final int IMAGE_PICKCAMERA_REQUEST = 400;
+    private static final String SELECT_PROFILE_PIC = "Select Profile pic";
+    private static final String SELECT_DOCUMENT_PIC = "Select Document pic";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +104,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                addInfoCardSectionLayout.removeAllViewsInLayout();
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     if (Objects.equals(item.getKey(), uid)) {
                         User user = item.getValue(User.class);
@@ -129,6 +133,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
 
         // EDIT PROFILE PICTURE BUTTON
         editProfilePicButton.setOnClickListener(v -> {
+            selectPicType = SELECT_PROFILE_PIC;
             showCameraGallerySelectorDialogBox();
         });
 
@@ -142,7 +147,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                     .setDob(edtDOB.getText().toString())
                     .setEncodedImage(LocalBase64Util.encodeImageToBase64String(profilePic.getDrawable() != null ?
                             ((BitmapDrawable) profilePic.getDrawable()).getBitmap() : null))
-                    .setDocumentDetailsList(documentDetailsList)
+                    .setDocumentDetailsList(fetchDocumentDetails())
                     .setUserActive("Y")
                     .build();
             mDatabase.getReference().child("users").child(uid).setValue(userDetails);
@@ -161,17 +166,42 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         });
     }
 
+    // GATHER UP DOC DETAILS FROM SCREEN
+    private List<DocumentDetails> fetchDocumentDetails() {
+        List <DocumentDetails> documentDetails = new ArrayList<>();
+        for(int i = 1; i <= viewTagCounter; i++) {
+            TextView docName = (TextView) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_TVDC");
+            if (null != docName) {
+                EditText docId = (EditText) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_EDID");
+                TextView docImageString = (TextView) addInfoCardSectionLayout.findViewWithTag("TAG_"+i+"_TVDIMG");
+                documentDetails.add(DocumentDetails.Builder.newInstance()
+                        .setDocName(docName.getText().toString())
+                        .setDocId(null != docId.getText() ? docId.getText().toString() : null)
+                        .setDocEncodedImage(null != docImageString.getText() ? docImageString.getText().toString() : null)
+                        .build());
+            }
+        }
+        return documentDetails;
+    }
+
     // GENERATE CARDS FOR EDIT PROFILE SCREEN
     private void addDocumentInEditProfileScreen(DocumentDetails documentDetails) {
         // GENERATE DYNAMIC LAYOUT
         LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        ++viewTagCounter;
+
         // USE card_layout_view_info.xml TO CREATE LAYOUT
         CardView claiCardView = (CardView) layoutInflater.inflate(R.layout.card_layout_add_info, null);
         TextView tvDocumentName = (TextView) claiCardView.findViewById(R.id.clai_doc_name);
         tvDocumentName.setText(documentDetails.getDocName());
+        tvDocumentName.setTag("TAG_"+viewTagCounter+"_TVDC");
         EditText edTextDocumentId = (EditText) claiCardView.findViewById(R.id.clai_edtxt_doc_id);
         edTextDocumentId.setText(documentDetails.getDocId());
+        edTextDocumentId.setTag("TAG_"+viewTagCounter+"_EDID");
+        TextView tvDocumentImageString = (TextView) claiCardView.findViewById(R.id.clai_doc_encoded_image);
+        tvDocumentImageString.setText(documentDetails.getDocEncodedImage());
+        tvDocumentImageString.setTag("TAG_"+viewTagCounter+"_TVDIMG");
 
         // ADD CARD VIEW TO MAIN VIEW
         addInfoCardSectionLayout.addView(claiCardView);
@@ -191,6 +221,13 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         Button dialogOkayBtn = (Button) dialogView.findViewById(R.id.dlad_btn_okay);
         Button dialogCancelBtn = (Button) dialogView.findViewById(R.id.dlad_btn_cancel);
 
+        // INITIALIZE IMAGE VIEWS & DOC UPLOAD BUTTON
+        ivDocImage = (ImageView) dialogView.findViewById(R.id.dlad_doc_img);
+        ImageButton ivDocImageUploadButton = (ImageButton) dialogView.findViewById(R.id.dlad_upload_doc_img_button);
+        ivDocImageUploadButton.setOnClickListener(v -> {
+            selectPicType = SELECT_DOCUMENT_PIC;
+            showCameraGallerySelectorDialogBox();
+        });
         // SHOW ALERT DIALOG BOX
         addDocDetailsDialogBox.setView(dialogView);
         AlertDialog addDocDialog = addDocDetailsDialogBox.create();
@@ -220,15 +257,14 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         tvDocumentName.setText(edtDocName.getText());
         EditText edtDocumentName = (EditText) claiCardView.findViewById(R.id.clai_edtxt_doc_id);
         edtDocumentName.setText(edtDocId.getText());
+        TextView tvDocImageString = (TextView) claiCardView.findViewById(R.id.clai_doc_encoded_image);
+        tvDocImageString.setText(docImageBase64String);
         if(!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
-            tvDocumentName.setTag("textViewTag" +viewTagCounter);
-            edtDocumentName.setTag("editTextTag" +viewTagCounter);
-            documentDetailsList.add(DocumentDetails.Builder.newInstance()
-                    .setDocName(edtDocName.getText().toString())
-                    .setDocId(edtDocId.getText().toString())
-                    .setDocEncodedImage(null)
-                    .build());
+            tvDocumentName.setTag("TAG_" +viewTagCounter+"_TVDC");
+            edtDocumentName.setTag("TAG_" +viewTagCounter+"_EDID");
+            tvDocImageString.setTag("TAG_" +viewTagCounter+"_TVDIMG");
+
             // ADD CARD VIEW TO MAIN VIEW
             addInfoCardSectionLayout.addView(claiCardView);
         }
@@ -333,7 +369,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
     // ON SELECTION OF A PHOTO
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && selectPicType.equals(SELECT_PROFILE_PIC)) {
             if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
                 imageUri = data.getData();
                 uploadProfileCoverPhoto(imageUri);
@@ -342,10 +378,19 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                 uploadProfileCoverPhoto((Uri) savedState.getParcelable("imageUri"));
             }
         }
+        else if (resultCode == Activity.RESULT_OK && selectPicType.equals(SELECT_DOCUMENT_PIC)) {
+            if (requestCode == IMAGEPICK_GALLERY_REQUEST) {
+                imageUri = data.getData();
+                uploadDocumentPicture(imageUri);
+            }
+            if (requestCode == IMAGE_PICKCAMERA_REQUEST && savedState != null) {
+                uploadDocumentPicture((Uri) savedState.getParcelable("imageUri"));
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    // UPLOAD IMAGE
+    // UPLOAD PROFILE PICTURE
     private void uploadProfileCoverPhoto(Uri imageUri) {
         InputStream imageStream = null;
         if (imageUri != null) {
@@ -353,6 +398,21 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                 imageStream = this.getContentResolver().openInputStream(imageUri);
                 Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
                 profilePic.setImageBitmap(bitmapImage);
+            } catch (IOException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    // UPLOAD DOCUMENT IMAGE
+    private void uploadDocumentPicture(Uri imageUri) {
+        InputStream imageStream = null;
+        if (imageUri != null) {
+            try {
+                imageStream = this.getContentResolver().openInputStream(imageUri);
+                Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
+                ivDocImage.setImageBitmap(bitmapImage);
+                docImageBase64String = LocalBase64Util.encodeImageToBase64String(bitmapImage);
             } catch (IOException e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
