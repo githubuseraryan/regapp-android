@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -70,6 +72,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
     private String selectPicType;
     private ImageView ivDocImage;
     private String docImageBase64String = null;
+    String sharingImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
 
         // LOAD DATA IN VIEWS
         databaseReference.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 addInfoCardSectionLayout.removeAllViewsInLayout();
@@ -217,6 +221,18 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         ImageButton shareDocDetailsButton = (ImageButton) claiCardView.findViewById(R.id.clai_share_button);
         shareDocDetailsButton.setOnClickListener(buttonView -> {
             shareDocDetails(documentDetails);
+        });
+        ImageButton shareImageDetailsButton = claiCardView.findViewById(R.id.clai_share_button_image);
+        shareImageDetailsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(EditProfileDynamicActivity.this, "Sharing Image", Toast.LENGTH_LONG).show();
+                Intent intentImageShare = new Intent(Intent.ACTION_SEND);
+                intentImageShare.setType("Image");
+                //TODO first convert the image.
+
+
+            }
         });
 
         // ADD CARD VIEW TO MAIN VIEW

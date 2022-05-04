@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Login</string>
+    <string name="app_name">PIRSS</string>
     <string name="name">Name</string>
     <string name="enter_name">Enter Your Name</string>
     <string name="email">Email Id</string>

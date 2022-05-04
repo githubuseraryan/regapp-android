@@ -33,13 +33,22 @@
 
             <ImageButton
                 android:id="@+id/clai_share_button"
-                android:layout_width="30dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="#0000FF"
                 android:clickable="true"
                 android:contentDescription="@string/profile_pic"
                 android:focusable="true"
                 android:src="@android:drawable/ic_menu_share" />
+            <ImageButton
+                android:id="@+id/clai_share_button_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="#FFA200"
+                android:clickable="true"
+                android:contentDescription="@string/profile_pic"
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_mobile_screen_share_24" />
 
             <ImageButton
                 android:id="@+id/clai_view_doc_button"
