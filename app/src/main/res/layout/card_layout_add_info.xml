@@ -40,6 +40,7 @@
                 android:contentDescription="@string/profile_pic"
                 android:focusable="true"
                 android:src="@android:drawable/ic_menu_share" />
+
             <ImageButton
                 android:id="@+id/clai_share_button_image"
                 android:layout_width="30dp"

@@ -227,6 +227,9 @@ public class SignUpScreenDynamicActivity extends AppCompatActivity {
         ImageButton shareDocDetailsButton = (ImageButton) claiCardView.findViewById(R.id.clai_share_button);
         shareDocDetailsButton.setVisibility(View.GONE);
 
+        ImageButton shareImageButton = (ImageButton) claiCardView.findViewById(R.id.clai_share_button_image);
+        shareImageButton.setVisibility(View.GONE);
+
         if(!edtDocName.getText().toString().isEmpty()) {
             ++viewTagCounter;
             tvDocumentName.setTag("TAG_" +viewTagCounter+"_TVDC");
