@@ -230,6 +230,39 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                 Intent intentImageShare = new Intent(Intent.ACTION_SEND);
                 intentImageShare.setType("Image");
                 //TODO first convert the image.
+                sharingImage = LocalBase64Util.decodeBase64StringToImage(documentDetails.getDocEncodedImage());
+                File imagefolder = new File(getCacheDir(), "images");
+                Uri uri = null;
+                try {
+                    imagefolder.mkdirs();
+                    File file = new File(imagefolder, "shared_image.png");
+                    FileOutputStream outputStream = new FileOutputStream(file);
+                    sharingImage.compress(Bitmap.CompressFormat.PNG, 90, outputStream);
+                    outputStream.flush();
+                    outputStream.close();
+                    uri = FileProvider.getUriForFile(getApplicationContext(), "com.mydomain.fileprovider", file);
+
+
+                }catch (Exception e){
+                    Toast.makeText(EditProfileDynamicActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                Intent intent = new Intent(Intent.ACTION_SEND);
+
+                // putting uri of image to be shared
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+
+                // adding text to share
+                intent.putExtra(Intent.EXTRA_TEXT, "Sharing Image");
+
+                // Add subject Here
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Information Image");
+
+                // setting type to image
+                intent.setType("image/png");
+
+                // calling startactivity() to share
+                startActivity(Intent.createChooser(intent, "Share Via"));
+
 
 
             }
