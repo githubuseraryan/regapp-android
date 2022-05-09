@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/dlvdi_doc_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_user"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/registered" />
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/dlvdi_btn_close"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/button_close"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+</LinearLayout>
