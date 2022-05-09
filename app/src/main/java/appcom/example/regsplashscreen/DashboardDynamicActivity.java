@@ -76,6 +76,7 @@ public class DashboardDynamicActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                addInfoCardSectionLayout.removeAllViewsInLayout();
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     if (Objects.equals(item.getKey(), uid)) {
                         User user = item.getValue(User.class);

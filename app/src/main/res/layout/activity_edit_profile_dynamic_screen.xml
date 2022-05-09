@@ -52,6 +52,15 @@
                 app:cardPreventCornerOverlap="true"
                 app:cardUseCompatPadding="true">
 
+                <TextView
+                    android:id="@+id/epd_tv_useradmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/doc_img"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

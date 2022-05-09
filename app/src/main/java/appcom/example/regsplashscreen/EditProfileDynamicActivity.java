@@ -101,6 +101,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
         EditText edtEmailId = findViewById(R.id.epd_edtxt_email_id);
         EditText edtUserName = findViewById(R.id.epd_edtxt_username);
         EditText edtDOB = findViewById(R.id.epd_edtxt_dob);
+        TextView tvUserAdmin = findViewById(R.id.epd_tv_useradmin);
         profilePic = findViewById(R.id.epd_profile_pic);
 
         // LOAD DATA IN VIEWS
@@ -115,6 +116,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                         edtUserName.setText(Objects.requireNonNull(user).getUserName());
                         edtEmailId.setText(user.getEmailId());
                         edtDOB.setText(user.getDob());
+                        tvUserAdmin.setText(user.getUserAdmin());
                         profilePic.setImageBitmap(LocalBase64Util.decodeBase64StringToImage(user.getEncodedImage()));
                         emailId = user.getEmailId();
                         if (null != user.getDocumentDetailsList()) {
@@ -153,6 +155,7 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                             ((BitmapDrawable) profilePic.getDrawable()).getBitmap() : null))
                     .setDocumentDetailsList(fetchDocumentDetails())
                     .setUserActive("Y")
+                    .setUserAdmin(tvUserAdmin.getText().toString())
                     .build();
             mDatabase.getReference().child("users").child(uid).setValue(userDetails);
             Intent intent = new Intent(EditProfileDynamicActivity.this, DashboardDynamicActivity.class);

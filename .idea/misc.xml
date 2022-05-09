@@ -6,6 +6,7 @@
         <entry key="..\:/Projects/regapp-android/app/src/main/res/drawable/shape_user.xml" value="0.214" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_dashboard.xml" value="0.16" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_dashboard_screen.xml" value="0.5" />
+        <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_edit_profile_dynamic_screen.xml" value="0.1403985507246377" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_edit_profile_screen.xml" value="0.22916666666666666" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_editprofile.xml" value="0.22" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_login.xml" value="0.35625" />
@@ -16,6 +17,7 @@
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_sign_up.xml" value="0.17447495961227788" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.1" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/activity_splash_screen.xml" value="0.16875" />
+        <entry key="..\:/Projects/regapp-android/app/src/main/res/layout/card_layout_add_info.xml" value="0.1403985507246377" />
         <entry key="..\:/Projects/regapp-android/app/src/main/res/menu/menu_dashboard.xml" value="0.33" />
         <entry key="..\:/RegSplashScreen/app/src/main/res/drawable/ic_baseline_mobile_screen_share_24.xml" value="0.159" />
         <entry key="..\:/RegSplashScreen/app/src/main/res/drawable/ic_launcher_background.xml" value="0.159" />
