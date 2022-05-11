@@ -123,7 +123,9 @@ public class EditProfileDynamicActivity extends AppCompatActivity {
                         profilePic.setImageBitmap(LocalBase64Util.decodeBase64StringToImage(user.getEncodedImage()));
                         emailId = user.getEmailId();
                         if (null != user.getDocumentDetailsList()) {
-                            user.getDocumentDetailsList().forEach(documentDetails -> addDocumentInEditProfileScreen(documentDetails));
+                            for (DocumentDetails documentDetails : user.getDocumentDetailsList()) {
+                                addDocumentInEditProfileScreen(documentDetails);
+                            }
                         }
                     }
                 }

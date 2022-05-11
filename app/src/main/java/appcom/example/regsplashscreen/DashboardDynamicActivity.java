@@ -96,7 +96,9 @@ public class DashboardDynamicActivity extends AppCompatActivity {
                         tvDob.setText(user.getDob());
                         profilePicture.setImageBitmap(LocalBase64Util.decodeBase64StringToImage(user.getEncodedImage()));
                         if (null != user.getDocumentDetailsList()) {
-                            user.getDocumentDetailsList().forEach(documentDetails -> addDocumentInDashboard(documentDetails));
+                            for (DocumentDetails documentDetails : user.getDocumentDetailsList()) {
+                                addDocumentInDashboard(documentDetails);
+                            }
                         }
                         progressDialog.dismiss();
                     }
